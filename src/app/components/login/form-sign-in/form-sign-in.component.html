@@ -1,0 +1,24 @@
+<form #contactForm="ngForm" (ngSubmit)="contactForm.valid && onSubmit()">
+  <app-input-text
+    [label]="labelPseudo"
+    [placeholder]="placeholderPseudo"
+    (emitRefInput)="changeInForm($event)"
+  ></app-input-text>
+  <app-input-text
+    [label]="labelEmail"
+    [placeholder]="placeholderEmail"
+    (emitRefInput)="changeInForm($event)"
+  ></app-input-text>
+  <app-input-text
+    [label]="labelPassword"
+    [placeholder]="placeholderPassword"
+    (emitRefInput)="changeInForm($event)"
+    [helperText]="helperTextPassword"
+  ></app-input-text>
+  <app-input-text
+    [label]="labelConfirmPassword"
+    [placeholder]="placeholderConfirmPassword"
+    (emitRefInput)="changeInForm($event)"
+  ></app-input-text>
+  <button type="submit" [disabled]="contactForm.invalid">S'incrire</button>
+</form>

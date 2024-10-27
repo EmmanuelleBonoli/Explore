@@ -1,0 +1,56 @@
+<!-- <footer> -->
+<!-- <div class="card flex justify-content-center">
+    <p-button icon="pi pi-home" [rounded]="true" size="large" />
+    <p-button
+      (onClick)="sidebarVisible = true"
+      [rounded]="true"
+      icon="pi pi-user"
+      size="large"
+    />
+  </div> -->
+
+<div>
+  <p-toolbar
+    styleClass="bg-yellow-500 shadow-2"
+    [style]="{
+      width: '100%',
+      'border-radius': '3rem',
+      'background-image':
+        'linear-gradient(to right, var(--yellow-300), var(--yellow-400))'
+    }"
+  >
+    <ng-template pTemplate="start">
+      <img src="https://primefaces.org/cdn/primeng/images/primeng.svg" />
+    </ng-template>
+
+    <ng-template pTemplate="center">
+      <div class="flex flex-wrap align-items-center gap-3">
+        <button
+          class="p-link inline-flex justify-content-center align-items-center text-white h-3rem w-3rem border-circle hover:bg-white-alpha-10 transition-all transition-duration-200"
+        >
+          <i class="pi pi-search text-2xl"></i>
+        </button>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="flex align-items-center gap-2">
+        <p-avatar
+          (click)="sidebarVisible = true"
+          image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          shape="circle"
+        />
+      </div>
+    </ng-template>
+  </p-toolbar>
+</div>
+<!-- </footer> -->
+
+<p-sidebar [(visible)]="sidebarVisible" position="bottom">
+  <h3>Sidebar</h3>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </p>
+</p-sidebar>

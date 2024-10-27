@@ -1,0 +1,19 @@
+<div class="card flex justify-content-center">
+  <p-card
+    header="{{ activity.name }}"
+    subheader="Card Subheader"
+    [style]="{ width: '360px' }"
+  >
+    <ng-template pTemplate="header">
+      <img alt="Card" [src]="activity.picture" />
+    </ng-template>
+    <p>
+      {{ activity.description }}
+    </p>
+    <ng-template pTemplate="footer">
+      <div class="flex gap-3 mt-1">
+        <p-button label="Save" class="w-full" styleClass="w-full" />
+      </div>
+    </ng-template>
+  </p-card>
+</div>

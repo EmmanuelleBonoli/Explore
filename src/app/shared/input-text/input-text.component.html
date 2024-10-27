@@ -1,0 +1,17 @@
+<div class="input-text">
+  <label for="{{ label }}">{{ label }}</label>
+  <input
+    (input)="sendInput()"
+    #refInput="ngModel"
+    pInputText
+    id="{{ label }}"
+    placeholder="{{ placeholder }}"
+    [(ngModel)]="value"
+    required
+  />
+  @if(helperText){
+  <small id="{{ label }}-help">
+    {{ helperText }}
+  </small>
+  }
+</div>
