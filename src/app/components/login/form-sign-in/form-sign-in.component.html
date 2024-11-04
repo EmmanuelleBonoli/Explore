@@ -1,24 +1,23 @@
 <form #contactForm="ngForm" (ngSubmit)="contactForm.valid && onSubmit()">
+  <div>Le formulaire est-il soumis ? {{ contactForm.submitted }}</div>
+  <div>Le formulaire est-il valide ? {{ contactForm.valid }}</div>
+  <div>Le formulaire est-il invalide ? {{ contactForm.invalid }}</div>
+
   <app-input-text
-    [label]="labelPseudo"
-    [placeholder]="placeholderPseudo"
-    (emitRefInput)="changeInForm($event)"
+    [inputControls]="newInscription.pseudo"
+    [isFormSubmitted]="contactForm.submitted"
   ></app-input-text>
   <app-input-text
-    [label]="labelEmail"
-    [placeholder]="placeholderEmail"
-    (emitRefInput)="changeInForm($event)"
+    [inputControls]="newInscription.email"
+    [isFormSubmitted]="contactForm.submitted"
   ></app-input-text>
   <app-input-text
-    [label]="labelPassword"
-    [placeholder]="placeholderPassword"
-    (emitRefInput)="changeInForm($event)"
-    [helperText]="helperTextPassword"
+    [inputControls]="newInscription.password"
+    [isFormSubmitted]="contactForm.submitted"
   ></app-input-text>
   <app-input-text
-    [label]="labelConfirmPassword"
-    [placeholder]="placeholderConfirmPassword"
-    (emitRefInput)="changeInForm($event)"
+    [inputControls]="newInscription.confirmPassword"
+    [isFormSubmitted]="contactForm.submitted"
   ></app-input-text>
   <button type="submit" [disabled]="contactForm.invalid">S'incrire</button>
 </form>

@@ -1,17 +1,19 @@
 <div class="input-text">
-  <label for="{{ label }}">{{ label }}</label>
+  <label for="{{ inputControls.label }}">{{ inputControls.label }}</label>
   <input
-    (input)="sendInput()"
     #refInput="ngModel"
     pInputText
-    id="{{ label }}"
-    placeholder="{{ placeholder }}"
-    [(ngModel)]="value"
-    required
+    [id]="inputControls.label"
+    [placeholder]="inputControls.placeholder"
+    [(ngModel)]="inputControls.value"
+    (ngModelChange)="onInputChange()"
+    [required]="inputControls.controls.required"
+    [minlength]="inputControls.controls.minLength"
+    [maxlength]="inputControls.controls.maxLength"
   />
-  @if(helperText){
-  <small id="{{ label }}-help">
-    {{ helperText }}
-  </small>
-  }
+  <app-input-error
+    [isFormSubmitted]="isFormSubmitted"
+    [refInput]="refInput"
+    [inputControls]="inputControls"
+  ></app-input-error>
 </div>

@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { InputTextComponent } from '../../../shared/input-text/input-text.component';
 import { InputValueStatus } from '../../../models/input-value-status';
 import { InputErrorComponent } from '../../../shared/input-error/input-error.component';
 import { FormsModule } from '@angular/forms';
-import { SubscriptionNewUser } from '../../../models/subscription-new-user';
+import { SubscriptionNewUser } from '../../../models/subscription-new-user.class';
 
 @Component({
   selector: 'app-form-sign-in',
@@ -13,40 +14,36 @@ import { SubscriptionNewUser } from '../../../models/subscription-new-user';
   styleUrl: './form-sign-in.component.scss',
 })
 export class FormSignInComponent {
-  labelEmail: string = 'Email';
-  placeholderEmail: string = 'exemple@gmail.com';
+  @ViewChild('contactForm') contactForm!: NgForm;
 
-  labelPseudo: string = 'Pseudo';
-  placeholderPseudo: string = 'exemple : Major Manu';
+  newInscription = new SubscriptionNewUser();
 
-  labelPassword: string = 'Password';
-  placeholderPassword: string = '';
-  helperTextPassword: string =
-    'Le mot de password doit contenir au moins 8 caractères, un caractère spécial et une majuscule';
-
-  labelConfirmPassword: string = 'Confirmation Password';
-  placeholderConfirmPassword: string = '';
-
-  newInscription!: SubscriptionNewUser;
-
-  changeInForm(inputChange: InputValueStatus): void {
-    switch (inputChange.label) {
-      case 'Pseudo':
-        this.newInscription.pseudo = inputChange;
-        break;
-      case 'Email':
-        this.newInscription.email = inputChange;
-        break;
-      case 'Password':
-        this.newInscription.password = inputChange;
-        break;
-      case 'Confirmation Password':
-        this.newInscription.confirmPassword = inputChange;
-        break;
-    }
-    console.log('inputChange', inputChange);
-  }
+  // changeInForm(inputChange: InputValueStatus): void {
+  //   console.log('inputChange', inputChange);
+  //   switch (inputChange.label) {
+  //     case 'Pseudo':
+  //       this.newInscription.pseudo.value = inputChange.value;
+  //       this.newInscription.pseudo.isValid = inputChange.isValid;
+  //       break;
+  //     case 'Email':
+  //       this.newInscription.email.value = inputChange.value;
+  //       this.newInscription.email.isValid = inputChange.isValid;
+  //       break;
+  //     case 'Mot de passe':
+  //       console.log('inputChange password: ' + inputChange.value);
+  //       this.newInscription.password.value = inputChange.value;
+  //       this.newInscription.password.isValid = inputChange.isValid;
+  //       break;
+  //     case 'Confirmation du mot de passe':
+  //       this.newInscription.confirmPassword.value = inputChange.value;
+  //       this.newInscription.confirmPassword.isValid = inputChange.isValid;
+  //       break;
+  //   }
+  //   console.log('newInscription', this.newInscription);
+  //   console.log('contactForm', this.contactForm);
+  // }
   onSubmit(): void {
     console.log('formulaire validé');
+    console.log('newInscription', this.newInscription);
   }
 }

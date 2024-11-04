@@ -1,1 +1,14 @@
-<p>input-error works!</p>
+@if(refInput.errors?.['required'] && isFormSubmitted){
+<small>Ce champ est requis.</small>
+} @if(refInput.errors?.['minlength']&& isFormSubmitted){
+<small>Minimum {{ inputControls.controls.minLength }} caractères requis.</small>
+} @if(refInput.errors?.['maxlength']&& isFormSubmitted){
+<small>Maximum {{ inputControls.controls.maxLength }} caractères requis.</small>
+} @if(inputControls.helperText){
+<small
+  id="{{ inputControls.label }}-help"
+  [ngStyle]="{ color: inputControls.isValid ? 'green' : 'red' }"
+>
+  {{ inputControls.helperText }}
+</small>
+}

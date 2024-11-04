@@ -5,6 +5,7 @@ import { NgModel } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { InputValueStatus } from '../../models/input-value-status';
 import { InputErrorComponent } from '../input-error/input-error.component';
+import { InputValueControls } from '../../models/input-value-controls';
 
 @Component({
   selector: 'app-input-text',
@@ -14,23 +15,25 @@ import { InputErrorComponent } from '../input-error/input-error.component';
   styleUrl: './input-text.component.scss',
 })
 export class InputTextComponent {
-  @Input() placeholder!: string;
-  @Input() label!: string;
-  @Input() helperText!: string;
+  @Input() inputControls!: InputValueControls;
+  @Input() isFormSubmitted!: boolean;
 
-  value: string = '';
   @ViewChild('refInput') refInput!: NgModel;
 
-  @Output() emitRefInput: EventEmitter<InputValueStatus> =
-    new EventEmitter<InputValueStatus>();
+  // @Output() emitRefInput: EventEmitter<InputValueStatus> =
+  //   new EventEmitter<InputValueStatus>();
 
-  sendInput(): void {
-    console.log('refInput', this.refInput);
-    const returnValue: InputValueStatus = {
-      label: this.label,
-      value: this.value,
-      isValid: this.refInput.valid,
-    };
-    this.emitRefInput.emit(returnValue);
+  onInputChange(): void {
+    // Vérifie si refInput est défini avant d'y accéder
+    if (this.refInput) {
+      this.inputControls.isValid = this.refInput.valid ? true : false;
+
+      // // Émet l'événement si nécessaire
+      // const returnValue: InputValueStatus = {
+      //   label: this.inputControls.label,
+      //   isValid: this.inputControls.isValid,
+      // };
+      // this.emitRefInput.emit(returnValue);
+    }
   }
 }

@@ -5,6 +5,8 @@ import { Activity } from '../models/activity.class';
   providedIn: 'root',
 })
 export class DataActivitiesService {
+  /* exemple d'activités test, sera supprimé quand le back sera mis en place */
+
   dataActivities: Activity[] = [
     {
       id: 'uuid1',
@@ -41,6 +43,9 @@ export class DataActivitiesService {
     },
   ];
 
+  /*
+à remplacer ici par une requete du back pour obtenir l'ensemble des activités
+*/
   getDataActivities(): Activity[] {
     return this.dataActivities;
   }
