@@ -10,6 +10,7 @@ export class SubscriptionNewUser {
     email: InputValueControls = {
       label: 'Email',
       placeholder: 'exemple@gmail.com',
+      type: 'email',
       value: '',
       isValid: false,
       helperText: '',
@@ -17,9 +18,8 @@ export class SubscriptionNewUser {
         required: true,
         minLength: 5,
         maxLength: null,
-        custom: (): void =>
-          // TODO: MAKE function to verifyEmail
-          console.log('make function to verify if email is already used'),
+        pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
+        check: this.verifyEmail(),
       },
     },
     pseudo: InputValueControls = {
@@ -32,14 +32,13 @@ export class SubscriptionNewUser {
         required: true,
         minLength: 4,
         maxLength: 12,
-        custom: (): void =>
-          // TODO: MAKE function to verifyPseudo
-          console.log('make function to verify if pseudo is already used'),
+        check: this.verifyPseudo(),
       },
     },
     password: InputValueControls = {
       label: 'Mot de passe',
       placeholder: '',
+      type: 'password',
       value: '',
       isValid: false,
       helperText:
@@ -47,12 +46,8 @@ export class SubscriptionNewUser {
       controls: {
         required: true,
         minLength: 8,
-        maxLength: null,
-        custom: () => {
-          console.log(
-            'regex for control password : if true helpertext greeen else red'
-          );
-        },
+        maxLength: 16,
+        pattern: `^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$`,
       },
     },
     confirmPassword: InputValueControls = {
@@ -64,14 +59,9 @@ export class SubscriptionNewUser {
       controls: {
         required: true,
         minLength: 8,
-        maxLength: null,
-        //TODO: function to verify egality of passwords.
-        custom: () => {
-          console.log('verify egality of passwords');
-          console.log(
-            'if false : return : Les 2 mots de passe doivent être égaux.'
-          );
-        },
+        maxLength: 16,
+        pattern: `^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$`,
+        check: this.verifyEqualityPassword(),
       },
     }
   ) {
@@ -79,5 +69,38 @@ export class SubscriptionNewUser {
     this.email = email;
     this.password = password;
     this.confirmPassword = confirmPassword;
+  }
+
+  verifyEmail(): () => Promise<boolean> {
+    return async () => {
+      //TODO: changer pour appel au backend
+      const isEmailUsed = await new Promise<boolean>((resolve) => {
+        setTimeout(() => {
+          resolve(false);
+        }, 1000);
+      });
+      return isEmailUsed; // Retourne true si l'email est déjà utilisé, sinon false
+    };
+  }
+
+  verifyPseudo(): () => Promise<boolean> {
+    return async () => {
+      //TODO: changer pour appel au backend
+      const isPseudoUsed = await new Promise<boolean>((resolve) => {
+        setTimeout(() => {
+          resolve(false);
+        }, 1000);
+      });
+
+      return isPseudoUsed; // Retourne true si le pseudo est déjà utilisé, sinon false
+    };
+  }
+
+  verifyEqualityPassword(): () => boolean {
+    return () => {
+      const password = this.password.value;
+      const confirmPassword = this.confirmPassword.value;
+      return password === confirmPassword;
+    };
   }
 }

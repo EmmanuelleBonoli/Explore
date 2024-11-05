@@ -3,6 +3,7 @@
   <input
     #refInput="ngModel"
     pInputText
+    [type]="inputControls.type"
     [id]="inputControls.label"
     [placeholder]="inputControls.placeholder"
     [(ngModel)]="inputControls.value"
@@ -10,6 +11,7 @@
     [required]="inputControls.controls.required"
     [minlength]="inputControls.controls.minLength"
     [maxlength]="inputControls.controls.maxLength"
+    [pattern]="inputControls.controls.pattern || ''"
   />
   <app-input-error
     [isFormSubmitted]="isFormSubmitted"

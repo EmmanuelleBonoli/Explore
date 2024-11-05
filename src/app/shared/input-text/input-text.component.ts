@@ -1,9 +1,7 @@
-import { Component, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { NgModel } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
-import { InputValueStatus } from '../../models/input-value-status';
 import { InputErrorComponent } from '../input-error/input-error.component';
 import { InputValueControls } from '../../models/input-value-controls';
 
@@ -20,20 +18,33 @@ export class InputTextComponent {
 
   @ViewChild('refInput') refInput!: NgModel;
 
-  // @Output() emitRefInput: EventEmitter<InputValueStatus> =
-  //   new EventEmitter<InputValueStatus>();
-
   onInputChange(): void {
-    // Vérifie si refInput est défini avant d'y accéder
-    if (this.refInput) {
-      this.inputControls.isValid = this.refInput.valid ? true : false;
+    const inputIsValid = this.refInput.valid;
 
-      // // Émet l'événement si nécessaire
-      // const returnValue: InputValueStatus = {
-      //   label: this.inputControls.label,
-      //   isValid: this.inputControls.isValid,
-      // };
-      // this.emitRefInput.emit(returnValue);
+    this.inputControls.isValid = inputIsValid ? true : false;
+
+    if (inputIsValid && this.inputControls.controls.check) {
+      const checkResult = this.inputControls.controls.check();
+
+      if (checkResult instanceof Promise) {
+        checkResult
+          .then((isValid) => {
+            // Mettre à jour isValid et helperText en fonction du résultat
+            this.inputControls.isValid = isValid;
+            this.inputControls.helperText = isValid
+              ? ''
+              : `${this.inputControls.value} est déjà utilisé.`;
+          })
+          .catch((err) => {
+            console.error('Erreur lors de la vérification', err);
+          });
+      } else {
+        const isValid = checkResult;
+        this.inputControls.isValid = isValid;
+        this.inputControls.helperText = isValid
+          ? ''
+          : 'Les 2 mots de passe doivent être égaux.';
+      }
     }
   }
 }
