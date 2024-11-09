@@ -54,6 +54,7 @@ export class SubscriptionNewUser {
       label: 'Confirmation du mot de passe',
       placeholder: '',
       value: '',
+      type: 'password',
       isValid: false,
       helperText: '',
       controls: {

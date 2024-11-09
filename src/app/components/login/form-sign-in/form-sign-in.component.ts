@@ -4,11 +4,12 @@ import { InputTextComponent } from '../../../shared/input-text/input-text.compon
 import { InputErrorComponent } from '../../../shared/input-error/input-error.component';
 import { FormsModule } from '@angular/forms';
 import { SubscriptionNewUser } from '../../../models/subscription-new-user.class';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-form-sign-in',
   standalone: true,
-  imports: [InputTextComponent, InputErrorComponent, FormsModule],
+  imports: [InputTextComponent, InputErrorComponent, FormsModule, ButtonModule],
   templateUrl: './form-sign-in.component.html',
   styleUrl: './form-sign-in.component.scss',
 })

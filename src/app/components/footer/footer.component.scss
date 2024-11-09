@@ -1,6 +1,22 @@
 footer {
-  padding: 2%;
+  margin-top: 8vh;
   height: 10%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+
+  align-items: center;
+  background-color: rgb(117, 117, 117);
+  color: white;
+
+  .footer-mentions {
+    padding: 0 2% 2% 2%;
+    display: flex;
+    flex-direction: column;
+
+    .footer-links {
+      display: flex;
+      justify-content: space-around;
+      padding: 5%;
+    }
+  }
 }
