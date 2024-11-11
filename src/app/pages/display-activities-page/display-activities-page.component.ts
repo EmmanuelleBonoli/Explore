@@ -1,12 +1,14 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivityCardComponent } from '../../shared/activity-card/activity-card.component';
-import { Activity } from '../../models/activity.class';
-import { DataActivitiesService } from '../../services/data-activities.service';
-import { CarouselModule } from 'primeng/carousel';
-import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
-import { CardModule } from 'primeng/card';
-import { FooterComponent } from '../../components/footer/footer.component';
+import {Component, inject, OnInit} from '@angular/core';
+import {ActivityCardComponent} from '../../shared/activity-card/activity-card.component';
+import {Activity} from '../../models/activity.class';
+import {DataActivitiesService} from '../../services/data-activities.service';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import {TagModule} from 'primeng/tag';
+import {CardModule} from 'primeng/card';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {FooterComponent} from '../../components/footer/footer.component';
+import {ImageModule} from "primeng/image";
 
 @Component({
   selector: 'app-display-activities-page',
@@ -18,6 +20,8 @@ import { FooterComponent } from '../../components/footer/footer.component';
     ButtonModule,
     TagModule,
     FooterComponent,
+    ScrollPanelModule,
+    ImageModule
   ],
   templateUrl: './display-activities-page.component.html',
   styleUrl: './display-activities-page.component.scss',
@@ -25,29 +29,31 @@ import { FooterComponent } from '../../components/footer/footer.component';
 export class DisplayActivitiesPageComponent implements OnInit {
   activities: Activity[] = [];
   dataActivitiesService: DataActivitiesService = inject(DataActivitiesService);
-  responsiveOptions: any[] | undefined;
+
+  // responsiveOptions: any[] | undefined;
 
   ngOnInit(): void {
     this.activities = this.dataActivitiesService.getDataActivities();
 
-    this.responsiveOptions = [
-      {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1,
-      },
-      {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1,
-      },
-      {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1,
-      },
-    ];
+    //   this.responsiveOptions = [
+    //     {
+    //       breakpoint: '1400px',
+    //       numVisible: 3,
+    //       numScroll: 3
+    //     },
+    //     {
+    //       breakpoint: '1220px',
+    //       numVisible: 2,
+    //       numScroll: 2
+    //     },
+    //     {
+    //       breakpoint: '1100px',
+    //       numVisible: 3,
+    //       numScroll: 1
+    //     }
+    //   ];
   }
+
   // getSeverity(status: string): string | undefined {
   //   switch (status) {
   //     case 'INSTOCK':

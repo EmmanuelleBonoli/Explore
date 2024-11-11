@@ -1,13 +1,13 @@
 export class Activity {
-  id: string = '';
-  name: string = 'Activity';
-  description: string = 'Description';
-  dogFriendly: boolean = false;
-  cycling: boolean = false;
-  running: boolean = false;
-  walking: boolean = false;
-  picture: string = '';
-  publication: Date = new Date();
+  id = '';
+  name = 'Activity';
+  description = 'Description';
+  dogFriendly = false;
+  cycling = false;
+  running = false;
+  walking = false;
+  picture = '';
+  publication = new Date();
 
   constructor(
     id: string,

@@ -3,13 +3,15 @@
   <input
     #refInput="ngModel"
     pInputText
-    [id]="inputControls.label"
+    [type]="inputControls.type"
     [placeholder]="inputControls.placeholder"
     [(ngModel)]="inputControls.value"
     (ngModelChange)="onInputChange()"
     [required]="inputControls.controls.required"
     [minlength]="inputControls.controls.minLength"
     [maxlength]="inputControls.controls.maxLength"
+    [pattern]="inputControls.controls.pattern || ''"
+    autocomplete="autocomplete && inputControls.controls.type"
   />
   <app-input-error
     [isFormSubmitted]="isFormSubmitted"

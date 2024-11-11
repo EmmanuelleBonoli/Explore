@@ -1,23 +1,32 @@
-<form #contactForm="ngForm" (ngSubmit)="contactForm.valid && onSubmit()">
-  <div>Le formulaire est-il soumis ? {{ contactForm.submitted }}</div>
-  <div>Le formulaire est-il valide ? {{ contactForm.valid }}</div>
-  <div>Le formulaire est-il invalide ? {{ contactForm.invalid }}</div>
-
+<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit()">
   <app-input-text
-    [inputControls]="newInscription.pseudo"
-    [isFormSubmitted]="contactForm.submitted"
+    [inputControls]="newLogin.email"
+    [isFormSubmitted]="signInForm.submitted"
+    [autocomplete]="true"
   ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.email"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.password"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.confirmPassword"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
-  <button type="submit" [disabled]="contactForm.invalid">S'incrire</button>
+  <div class="passwordLogin">
+    <label for="pwd">{{ newLogin.password.label }}</label>
+    <p-password
+      id="pwd"
+      [(ngModel)]="newLogin.password.value"
+      [toggleMask]="true"
+      [feedback]="false"
+      [ngModelOptions]="{standalone: true}"
+      [placeholder]="newLogin.password.placeholder"
+      [required]="newLogin.password.controls.required"
+      [minlength]="newLogin.password.controls.minLength"
+      [maxlength]="newLogin.password.controls.maxLength"
+      [pattern]="newLogin.password.controls.pattern || ''"
+      autocomplete="new-password"
+    />
+  </div>
+  <div class="button-form-container">
+    <p-button
+      [rounded]="true"
+      type="submit"
+      label="Se connecter"
+      [disabled]="signInForm.invalid"
+    >
+    </p-button>
+  </div>
 </form>
