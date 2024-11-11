@@ -1,12 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivityCardComponent } from '../../shared/activity-card/activity-card.component';
-import { Activity } from '../../models/activity.class';
-import { DataActivitiesService } from '../../services/data-activities.service';
-import { CarouselModule } from 'primeng/carousel';
-import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
-import { CardModule } from 'primeng/card';
-import { FooterComponent } from '../../components/footer/footer.component';
+import {Component, inject, OnInit} from '@angular/core';
+import {ActivityCardComponent} from '../../shared/activity-card/activity-card.component';
+import {Activity} from '../../models/activity.class';
+import {DataActivitiesService} from '../../services/data-activities.service';
+import {CarouselModule} from 'primeng/carousel';
+import {ButtonModule} from 'primeng/button';
+import {TagModule} from 'primeng/tag';
+import {CardModule} from 'primeng/card';
+import {FooterComponent} from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-display-activities-page',
@@ -48,6 +48,7 @@ export class DisplayActivitiesPageComponent implements OnInit {
       },
     ];
   }
+
   // getSeverity(status: string): string | undefined {
   //   switch (status) {
   //     case 'INSTOCK':

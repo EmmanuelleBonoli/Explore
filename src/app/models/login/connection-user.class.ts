@@ -1,6 +1,6 @@
-import { InputValueControls } from '../shared/input-value-controls';
+import {InputValueControls} from '../shared/input-value-controls';
 
-export class ConnectionUser {
+export class ConnectionUserClass {
   email: InputValueControls;
   password: InputValueControls;
 

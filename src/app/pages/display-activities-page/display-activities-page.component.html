@@ -1,60 +1,60 @@
-@for (activity of activities; track $index) {
-  <app-activity-card [activity]="activity"></app-activity-card>
-}
-@for (activity of activities; track $index) {
-  <div class="card">
-    <p-carousel
-      [value]="activities"
-      [numVisible]="3"
-      [numScroll]="3"
-      [circular]="true"
-      [responsiveOptions]="responsiveOptions"
-      autoplayInterval="3000"
-    >
-      <ng-template let-activity pTemplate="item">
-        <div class="card flex justify-content-center">
-          <p-card
-            header="{{ activity.name }}"
-            subheader="Card Subheader"
-            [style]="{ width: '360px' }"
-          >
-            <ng-template pTemplate="header">
-              <img alt="Card" [src]="activity.picture"/>
-            </ng-template>
-            <p>
-              {{ activity.description }}
-            </p>
-            <ng-template pTemplate="footer">
-              <div class="flex gap-3 mt-1">
-                <p-button label="Save" class="w-full" styleClass="w-full"/>
-              </div>
-            </ng-template>
-          </p-card>
-        </div>
-
-        <div class="border-1 surface-border border-round m-2 p-3">
-          <div class="mb-3">
-            <div class="relative mx-auto">
-              <img
-                [src]="activity.picture"
-                [alt]="activity.name"
-                class="w-full border-round"
-                style="width: auto; max-height: 200px"
-              />
-              <!-- <p-tag
-                [value]="activity.publication"
-                [severity]="getSeverity(product.inventoryStatus)"
-                class="absolute"
-                [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
-              /> -->
+<!--@for (activity of activities; track $index) {-->
+<!--  <app-activity-card [activity]="activity"></app-activity-card>-->
+<!--}-->
+<!--@for (activity of activities; track $index) {-->
+<div class="card">
+  <p-carousel
+    [value]="activities"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="true"
+    [responsiveOptions]="responsiveOptions"
+    autoplayInterval="3000"
+  >
+    <ng-template let-activity pTemplate="item">
+      <div class="card flex justify-content-center">
+        <p-card
+          header="{{ activity.name }}"
+          subheader="Card Subheader"
+          [style]="{ width: '360px' }"
+        >
+          <ng-template pTemplate="header">
+            <img alt="Card" [src]="activity.picture"/>
+          </ng-template>
+          <p>
+            {{ activity.description }}
+          </p>
+          <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+              <p-button label="Save" class="w-full" styleClass="w-full"/>
             </div>
+          </ng-template>
+        </p-card>
+      </div>
+
+      <div class="border-1 surface-border border-round m-2 p-3">
+        <div class="mb-3">
+          <div class="relative mx-auto">
+            <img
+              [src]="activity.picture"
+              [alt]="activity.name"
+              class="w-full border-round"
+              style="width: auto; max-height: 200px"
+            />
+            <!-- <p-tag
+              [value]="activity.publication"
+              [severity]="getSeverity(product.inventoryStatus)"
+              class="absolute"
+              [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"
+            /> -->
           </div>
-          <div class="mb-3 font-medium">
-            {{ activity.name }}
-          </div>
-          <div class="flex justify-content-between align-items-center">
-            <div class="mt-0 font-semibold text-xl">blabla</div>
-            <span>
+        </div>
+        <div class="mb-3 font-medium">
+          {{ activity.name }}
+        </div>
+        <div class="flex justify-content-between align-items-center">
+          <div class="mt-0 font-semibold text-xl">blabla</div>
+          <span>
             <p-button
               icon="pi pi-heart"
               severity="secondary"
@@ -62,10 +62,10 @@
             />
             <p-button icon="pi pi-shopping-cart" styleClass="ml-2"/>
           </span>
-          </div>
         </div>
-      </ng-template>
-    </p-carousel>
-  </div>
-}
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
+<!--}-->
 
