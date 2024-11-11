@@ -1,26 +1,30 @@
-<form #contactForm="ngForm" (ngSubmit)="contactForm.valid && onSubmit()">
+<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit()">
   <app-input-text
-    [inputControls]="newInscription.pseudo"
-    [isFormSubmitted]="contactForm.submitted"
+    [inputControls]="newLogin.email"
+    [isFormSubmitted]="signInForm.submitted"
+    [autocomplete]="true"
   ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.email"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.password"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
-  <app-input-text
-    [inputControls]="newInscription.confirmPassword"
-    [isFormSubmitted]="contactForm.submitted"
-  ></app-input-text>
+  <div class="passwordLogin">
+    <label>{{ newLogin.password.label }}</label>
+    <p-password
+      [(ngModel)]="newLogin.password.value"
+      [toggleMask]="true"
+      [feedback]="false"
+      [ngModelOptions]="{standalone: true}"
+      [placeholder]="newLogin.password.placeholder"
+      [required]="newLogin.password.controls.required"
+      [minlength]="newLogin.password.controls.minLength"
+      [maxlength]="newLogin.password.controls.maxLength"
+      [pattern]="newLogin.password.controls.pattern || ''"
+      autocomplete="new-password"
+    />
+  </div>
   <div class="button-form-container">
     <p-button
       [rounded]="true"
       type="submit"
-      label="S'incrire"
-      [disabled]="contactForm.invalid"
+      label="Se connecter"
+      [disabled]="signInForm.invalid"
     >
     </p-button>
   </div>

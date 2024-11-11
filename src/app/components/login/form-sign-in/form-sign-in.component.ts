@@ -1,29 +1,33 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { InputTextComponent } from '../../../shared/input-text/input-text.component';
-import { InputErrorComponent } from '../../../shared/input-error/input-error.component';
-import { FormsModule } from '@angular/forms';
-import { SubscriptionNewUser } from '../../../models/subscription-new-user.class';
-import { ButtonModule } from 'primeng/button';
+import {Component, ViewChild} from '@angular/core';
+import {Button} from "primeng/button";
+import {FormsModule, NgForm} from "@angular/forms";
+import {InputTextComponent} from "../../../shared/input-text/input-text.component";
+import {ConnectionUser} from "../../../models/login/connection-user";
+import {PasswordModule} from 'primeng/password';
+import {InputTextModule} from "primeng/inputtext";
 
 @Component({
   selector: 'app-form-sign-in',
   standalone: true,
-  imports: [InputTextComponent, InputErrorComponent, FormsModule, ButtonModule],
+  imports: [
+    Button,
+    FormsModule,
+    InputTextComponent,
+    PasswordModule,
+    InputTextModule
+  ],
   templateUrl: './form-sign-in.component.html',
-  styleUrl: './form-sign-in.component.scss',
+  styleUrl: './form-sign-in.component.scss'
 })
 export class FormSignInComponent {
-  @ViewChild('contactForm') contactForm!: NgForm;
+  @ViewChild('signInForm') signInForm!: NgForm;
 
-  newInscription = new SubscriptionNewUser();
+  newLogin: ConnectionUser = new ConnectionUser();
 
   checkFormValidity(): boolean {
     return (
-      this.newInscription.email.isValid &&
-      this.newInscription.pseudo.isValid &&
-      this.newInscription.password.isValid &&
-      this.newInscription.confirmPassword.isValid
+      this.newLogin.email.isValid &&
+      this.newLogin.password.isValid
     );
   }
 
@@ -31,9 +35,11 @@ export class FormSignInComponent {
     const formIsValid = this.checkFormValidity();
     if (!formIsValid) {
       return;
-    }
+    } else {
 
+    }
     console.log('form valid');
-    console.log('new user to save in database', this.newInscription);
+    console.log('user is connected', this.newLogin);
   }
+
 }

@@ -1,0 +1,27 @@
+<form #signupForm="ngForm" (ngSubmit)="signupForm.valid && onSubmit()">
+  <app-input-text
+    [inputControls]="newInscription.pseudo"
+    [isFormSubmitted]="signupForm.submitted"
+  ></app-input-text>
+  <app-input-text
+    [inputControls]="newInscription.email"
+    [isFormSubmitted]="signupForm.submitted"
+  ></app-input-text>
+  <app-input-text
+    [inputControls]="newInscription.password"
+    [isFormSubmitted]="signupForm.submitted"
+  ></app-input-text>
+  <app-input-text
+    [inputControls]="newInscription.confirmPassword"
+    [isFormSubmitted]="signupForm.submitted"
+  ></app-input-text>
+  <div class="button-form-container">
+    <p-button
+      [rounded]="true"
+      type="submit"
+      label="S'incrire"
+      [disabled]="signupForm.invalid"
+    >
+    </p-button>
+  </div>
+</form>

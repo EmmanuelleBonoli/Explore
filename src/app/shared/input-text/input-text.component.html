@@ -4,7 +4,6 @@
     #refInput="ngModel"
     pInputText
     [type]="inputControls.type"
-    [id]="inputControls.label"
     [placeholder]="inputControls.placeholder"
     [(ngModel)]="inputControls.value"
     (ngModelChange)="onInputChange()"
@@ -12,6 +11,7 @@
     [minlength]="inputControls.controls.minLength"
     [maxlength]="inputControls.controls.maxLength"
     [pattern]="inputControls.controls.pattern || ''"
+    autocomplete="autocomplete && inputControls.controls.type"
   />
   <app-input-error
     [isFormSubmitted]="isFormSubmitted"

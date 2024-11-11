@@ -1,4 +1,4 @@
-import { InputValueControls } from './input-value-controls';
+import { InputValueControls } from '../shared/input-value-controls';
 
 export class SubscriptionNewUser {
   pseudo: InputValueControls;
