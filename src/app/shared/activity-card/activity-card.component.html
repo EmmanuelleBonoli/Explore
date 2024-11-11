@@ -1,19 +1,18 @@
-<div class="card flex justify-content-center">
-  <p-card
-    header="{{ activity.name }}"
-    subheader="Card Subheader"
-    [style]="{ width: '360px' }"
-  >
-    <ng-template pTemplate="header">
-      <img alt="Card" [src]="activity.picture" />
-    </ng-template>
-    <p>
-      {{ activity.description }}
-    </p>
-    <ng-template pTemplate="footer">
-      <div class="flex gap-3 mt-1">
-        <p-button label="Save" class="w-full" styleClass="w-full" />
-      </div>
-    </ng-template>
-  </p-card>
+<div class="border-1 surface-border border-round m-2 p-3">
+  <div class="mb-3">
+    <div class="relative mx-auto">
+      <p-image alt="Card" [src]="activity.picture" [preview]="true" class="w-full border-round">
+        <ng-template pTemplate="indicator">
+          <p>
+            {{ activity.description }}
+          </p>
+        </ng-template>
+      </p-image>
+      <p-tag
+        [value]="activity.description"
+        severity="success"
+        class="absolute"
+        [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"/>
+    </div>
+  </div>
 </div>

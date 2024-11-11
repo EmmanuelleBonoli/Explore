@@ -5,8 +5,9 @@
     [autocomplete]="true"
   ></app-input-text>
   <div class="passwordLogin">
-    <label>{{ newLogin.password.label }}</label>
+    <label for="pwd">{{ newLogin.password.label }}</label>
     <p-password
+      id="pwd"
       [(ngModel)]="newLogin.password.value"
       [toggleMask]="true"
       [feedback]="false"

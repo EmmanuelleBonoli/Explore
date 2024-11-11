@@ -30,7 +30,7 @@ export class InputTextComponent implements OnDestroy {
         debounceTime(500), // délai de 500ms avant d'émettre la valeur
         takeUntil(this.destroy$)
       )
-      .subscribe((value) => {
+      .subscribe(() => {
         const inputIsValid = this.refInput.valid;
 
         this.inputControls.isValid = inputIsValid ? true : false;
