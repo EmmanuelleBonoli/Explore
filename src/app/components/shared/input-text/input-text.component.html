@@ -1,0 +1,40 @@
+<div class="input-text">
+  <label for="{{ inputControls.label }}">{{ inputControls.label }}</label>
+  @if (inputControls && inputControls.type !== "password") {
+    <input
+      #refInput="ngModel"
+      pInputText
+      [type]="inputControls.type"
+      [placeholder]="inputControls.placeholder"
+      [(ngModel)]="inputControls.value"
+      (ngModelChange)="onInputChange()"
+      [required]="inputControls.controls.required"
+      [minlength]="inputControls.controls.minLength"
+      [maxlength]="inputControls.controls.maxLength"
+      [pattern]="inputControls.controls.pattern || ''"
+      autocomplete="autocomplete && inputControls.controls.type"
+    />
+  } @else {
+    <div class="passwordLogin">
+      <p-password
+        #refInput="ngModel"
+        [(ngModel)]="inputControls.value"
+        (ngModelChange)="onInputChange()"
+        name="password"
+        [toggleMask]="true"
+        [feedback]="false"
+        [placeholder]="inputControls.placeholder"
+        [required]="inputControls.controls.required"
+        [minlength]="inputControls.controls.minLength"
+        [maxlength]="inputControls.controls.maxLength"
+        [pattern]="inputControls.controls.pattern || ''"
+        autocomplete="new-password"
+      />
+    </div>
+  }
+
+  <app-input-error
+    [refInput]="refInput"
+    [inputControls]="inputControls"
+  ></app-input-error>
+</div>

@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivityCardComponent} from '../../shared/activity-card/activity-card.component';
-import {Activity} from '../../models/activity.class';
-import {DataActivitiesService} from '../../services/data-activities.service';
+import {ActivityCardComponent} from '../../components/shared/activity-card/activity-card.component';
+import {Activity} from '../../models/shared/activity.class';
+import {DataActivitiesService} from '../../services/activities/data-activities.service';
 import {CarouselModule} from 'primeng/carousel';
 import {ButtonModule} from 'primeng/button';
 import {TagModule} from 'primeng/tag';

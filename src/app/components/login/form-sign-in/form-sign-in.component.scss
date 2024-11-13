@@ -1,16 +1,10 @@
 
-.passwordLogin {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
 .button-form-container {
   display: flex;
   justify-content: center;
   margin-top: 5%;
 }
 
-.passwordLogin ::ng-deep .p-component {
-  width: 100%;
+a {
+  text-align: right;
 }

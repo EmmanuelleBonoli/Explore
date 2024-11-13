@@ -2,7 +2,7 @@ export interface InputValueControls {
   label: string;
   placeholder: string;
   value: string;
-  type?: string;
+  type: string;
   isValid: boolean;
   helperText: string;
   controls: {
@@ -11,5 +11,7 @@ export interface InputValueControls {
     maxLength: number | null;
     pattern?: string;
     check?: () => Promise<boolean> | boolean;
+    isCheckReturn?: boolean;
+    checkHelperText?: string;
   };
 }
