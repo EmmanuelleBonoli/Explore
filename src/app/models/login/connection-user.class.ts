@@ -3,6 +3,7 @@ import {InputValueControls} from '../shared/input-value-controls';
 export class ConnectionUserClass {
   email: InputValueControls;
   password: InputValueControls;
+  fieldsForm: InputValueControls[];
 
   constructor(
     email: InputValueControls = {
@@ -25,8 +26,7 @@ export class ConnectionUserClass {
       type: 'password',
       value: '',
       isValid: false,
-      helperText:
-        'Le mot de passe doit contenir au moins 8 caractères, un caractère spécial et une majuscule',
+      helperText: '',
       controls: {
         required: true,
         minLength: 8,
@@ -37,5 +37,6 @@ export class ConnectionUserClass {
   ) {
     this.email = email;
     this.password = password;
+    this.fieldsForm = [this.email, this.password]
   }
 }

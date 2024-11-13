@@ -1,31 +1,17 @@
-<form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit()">
-  <app-input-text
-    [inputControls]="newLogin.email"
-    [isFormSubmitted]="signInForm.submitted"
-    [autocomplete]="true"
-  ></app-input-text>
-  <div class="passwordLogin">
-    <label for="pwd">{{ newLogin.password.label }}</label>
-    <p-password
-      id="pwd"
-      [(ngModel)]="newLogin.password.value"
-      [toggleMask]="true"
-      [feedback]="false"
-      [ngModelOptions]="{standalone: true}"
-      [placeholder]="newLogin.password.placeholder"
-      [required]="newLogin.password.controls.required"
-      [minlength]="newLogin.password.controls.minLength"
-      [maxlength]="newLogin.password.controls.maxLength"
-      [pattern]="newLogin.password.controls.pattern || ''"
-      autocomplete="new-password"
-    />
-  </div>
+<form #signInForm="ngForm" (ngSubmit)="onSubmit()">
+  @for (input of newLogin; track $index) {
+    <app-input-text
+      [inputControls]="input"
+      [autocomplete]="true"
+    ></app-input-text>
+  }
+  <a>Mot de passe oublié ?</a>
   <div class="button-form-container">
     <p-button
       [rounded]="true"
       type="submit"
       label="Se connecter"
-      [disabled]="signInForm.invalid"
+      [disabled]="!checkFormValidity()"
     >
     </p-button>
   </div>

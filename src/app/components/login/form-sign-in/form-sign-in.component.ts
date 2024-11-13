@@ -1,10 +1,11 @@
 import {Component, ViewChild} from '@angular/core';
 import {Button} from "primeng/button";
 import {FormsModule, NgForm} from "@angular/forms";
-import {InputTextComponent} from "../../../shared/input-text/input-text.component";
+import {InputTextComponent} from "../../shared/input-text/input-text.component";
 import {ConnectionUserClass} from "../../../models/login/connection-user.class";
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from "primeng/inputtext";
+import {InputValueControls} from "../../../models/shared/input-value-controls";
 
 @Component({
   selector: 'app-form-sign-in',
@@ -22,21 +23,25 @@ import {InputTextModule} from "primeng/inputtext";
 export class FormSignInComponent {
   @ViewChild('signInForm') signInForm!: NgForm;
 
-  newLogin: ConnectionUserClass = new ConnectionUserClass();
+  newLogin: InputValueControls[] = new ConnectionUserClass().fieldsForm;
+
+  // newLogin: InputValueControls[] = []
+  //
+  // ngOnInit() {
+  //   const connectionUser = new ConnectionUserClass();
+  //   this.newLogin = connectionUser.fieldsForm;
+  // }
 
   checkFormValidity(): boolean {
-    return (
-      this.newLogin.email.isValid &&
-      this.newLogin.password.isValid
-    );
+    return this.newLogin.every(control => control.isValid);
   }
 
   onSubmit(): void {
+    console.log("signInForm", this.signInForm);
     const formIsValid = this.checkFormValidity();
     if (!formIsValid) {
       return;
     } else {
-      console.log('form valid');
       console.log('user is connected', this.newLogin);
     }
   }

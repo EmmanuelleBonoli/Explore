@@ -1,0 +1,29 @@
+@if (refInput && refInput.touched) {
+  @if (refInput.errors?.['required']) {
+    <small class="error-helper-text">Ce champ est requis.</small>
+  }
+  @if (refInput.errors?.['minlength']) {
+    <small class="error-helper-text">Minimum {{ inputControls.controls.minLength }} caractères requis.</small>
+  }
+  @if (refInput.errors?.['maxlength']) {
+    <small class="error-helper-text">Maximum {{ inputControls.controls.maxLength }} caractères requis.</small>
+  }
+  @if (refInput.errors?.['pattern']) {
+    <small class="error-helper-text">Le champ n'est pas valide.</small>
+  }
+}
+
+@if (inputControls.helperText && refInput) {
+  <small
+    id="{{ inputControls.label }}-help"
+    [ngStyle]="{ color: inputControls.isValid ? 'green' : refInput.dirty ?'red': 'black' }"
+  >
+    {{ inputControls.helperText }}
+  </small>
+}
+
+@if (refInput && inputControls.controls.isCheckReturn) {
+  <small>
+    {{ inputControls.controls.checkHelperText }}
+  </small>
+}

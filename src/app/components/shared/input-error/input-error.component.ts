@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { NgStyle } from '@angular/common';
-import { NgModel } from '@angular/forms';
-import { InputValueControls } from '../../models/shared/input-value-controls';
+import {Component, Input} from '@angular/core';
+import {NgStyle} from '@angular/common';
+import {NgModel} from '@angular/forms';
+import {InputValueControls} from '../../../models/shared/input-value-controls';
 
 @Component({
   selector: 'app-input-error',
@@ -12,6 +12,5 @@ import { InputValueControls } from '../../models/shared/input-value-controls';
 })
 export class InputErrorComponent {
   @Input() refInput!: NgModel;
-  @Input() isFormSubmitted!: boolean;
   @Input() inputControls!: InputValueControls;
 }

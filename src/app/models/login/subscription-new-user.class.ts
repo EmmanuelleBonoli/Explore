@@ -1,10 +1,16 @@
-import { InputValueControls } from '../shared/input-value-controls';
+import {inject} from "@angular/core";
+import {InputValueControls} from '../shared/input-value-controls';
+import {LoginService} from "../../services/user/login.service";
 
 export class SubscriptionNewUser {
   pseudo: InputValueControls;
   email: InputValueControls;
   password: InputValueControls;
   confirmPassword: InputValueControls;
+
+  loginService: LoginService = inject(LoginService);
+
+  fieldsForm: InputValueControls[];
 
   constructor(
     email: InputValueControls = {
@@ -19,12 +25,15 @@ export class SubscriptionNewUser {
         minLength: 5,
         maxLength: null,
         pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
-        check: this.verifyEmail(),
+        check: this.loginService.verifyEmail,
+        isCheckReturn: false,
+        checkHelperText: 'Cet email est déjà utilisé.'
       },
     },
     pseudo: InputValueControls = {
       label: 'Pseudo',
       placeholder: 'exemple : MajorManu',
+      type: 'text',
       value: '',
       isValid: false,
       helperText: '',
@@ -32,7 +41,9 @@ export class SubscriptionNewUser {
         required: true,
         minLength: 4,
         maxLength: 12,
-        check: this.verifyPseudo(),
+        check: this.loginService.verifyPseudo,
+        isCheckReturn: false,
+        checkHelperText: 'Ce pseudo est déjà utilisé.'
       },
     },
     password: InputValueControls = {
@@ -63,6 +74,8 @@ export class SubscriptionNewUser {
         maxLength: 16,
         pattern: `^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$`,
         check: this.verifyEqualityPassword(),
+        isCheckReturn: false,
+        checkHelperText: "Les 2 mots de passe doivent être égaux."
       },
     }
   ) {
@@ -70,31 +83,7 @@ export class SubscriptionNewUser {
     this.email = email;
     this.password = password;
     this.confirmPassword = confirmPassword;
-  }
-
-  verifyEmail(): () => Promise<boolean> {
-    return async () => {
-      //TODO: changer pour appel au backend
-      const isEmailUsed = await new Promise<boolean>((resolve) => {
-        setTimeout(() => {
-          resolve(false);
-        }, 1000);
-      });
-      return isEmailUsed; // Retourne true si l'email est déjà utilisé, sinon false
-    };
-  }
-
-  verifyPseudo(): () => Promise<boolean> {
-    return async () => {
-      //TODO: changer pour appel au backend
-      const isPseudoUsed = await new Promise<boolean>((resolve) => {
-        setTimeout(() => {
-          resolve(false);
-        }, 1000);
-      });
-
-      return isPseudoUsed; // Retourne true si le pseudo est déjà utilisé, sinon false
-    };
+    this.fieldsForm = [this.pseudo, this.email, this.password, this.confirmPassword];
   }
 
   verifyEqualityPassword(): () => boolean {
@@ -104,4 +93,24 @@ export class SubscriptionNewUser {
       return password === confirmPassword;
     };
   }
+
+  // verifyEmail = async function (): Promise<boolean> {
+  //   // TODO: remplacer par une vraie requête backend
+  //   const isEmailNotUsed = await new Promise<boolean>((resolve) => {
+  //     setTimeout(() => {
+  //       resolve(true); // Simule un retour indiquant si l'email est déjà utilisé
+  //     }, 1000);
+  //   });
+  //   return isEmailNotUsed;
+  // }
+
+  // verifyPseudo = async function (): Promise<boolean> {
+  //   // TODO: remplacer par une vraie requête backend
+  //   const isPseudoNotUsed = await new Promise<boolean>((resolve) => {
+  //     setTimeout(() => {
+  //       resolve(true); // Simule un retour indiquant si le pseudo est déjà utilisé
+  //     }, 1000);
+  //   });
+  //   return isPseudoNotUsed;
+  // }
 }

@@ -3,7 +3,7 @@ import {RouterOutlet} from '@angular/router';
 import {FooterComponent} from './components/footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {PrimeNGConfig} from 'primeng/api';
-import {HeaderComponent} from './shared/header/header.component';
+import {HeaderComponent} from './components/shared/header/header.component';
 
 @Component({
   selector: 'app-root',

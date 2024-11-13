@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { InputTextComponent } from '../../../shared/input-text/input-text.component';
-import { FormsModule } from '@angular/forms';
-import { SubscriptionNewUser } from '../../../models/login/subscription-new-user.class';
-import { ButtonModule } from 'primeng/button';
+import {Component, ViewChild} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {InputTextComponent} from '../../shared/input-text/input-text.component';
+import {FormsModule} from '@angular/forms';
+import {SubscriptionNewUser} from '../../../models/login/subscription-new-user.class';
+import {ButtonModule} from 'primeng/button';
+import {InputValueControls} from "../../../models/shared/input-value-controls";
 
 
 @Component({
@@ -16,26 +17,26 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './form-sign-up.component.scss'
 })
 export class FormSignUpComponent {
-  @ViewChild('contactForm') signupForm!: NgForm;
+  @ViewChild('signupForm') signupForm!: NgForm;
 
-  newInscription = new SubscriptionNewUser();
+  newInscription: InputValueControls[] = new SubscriptionNewUser().fieldsForm;
+
+  // newInscription: InputValueControls[] = []
+  //
+  // ngOnInit() {
+  //   this.newInscription = new SubscriptionNewUser().fieldsForm;
+  // }
 
   checkFormValidity(): boolean {
-    return (
-      this.newInscription.email.isValid &&
-      this.newInscription.pseudo.isValid &&
-      this.newInscription.password.isValid &&
-      this.newInscription.confirmPassword.isValid
-    );
+    return this.newInscription.every(control => control.isValid);
   }
 
   onSubmit(): void {
+    console.log("signInForm", this.signupForm);
     const formIsValid = this.checkFormValidity();
     if (!formIsValid) {
       return;
     }
-
-    console.log('form valid');
     console.log('new user to save in database', this.newInscription);
   }
 }
