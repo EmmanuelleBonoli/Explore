@@ -31,7 +31,7 @@ export class FormSignUpComponent {
     return this.newInscription.every(control => control.isValid);
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     console.log("signInForm", this.signupForm);
     const formIsValid = this.checkFormValidity();
     if (!formIsValid) {

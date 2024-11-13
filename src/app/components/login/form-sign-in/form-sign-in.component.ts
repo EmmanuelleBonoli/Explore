@@ -36,7 +36,7 @@ export class FormSignInComponent {
     return this.newLogin.every(control => control.isValid);
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     console.log("signInForm", this.signInForm);
     const formIsValid = this.checkFormValidity();
     if (!formIsValid) {

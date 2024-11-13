@@ -4,13 +4,14 @@ import {ControlContainer, FormsModule, NgForm, NgModel} from '@angular/forms';
 import {InputErrorComponent} from '../input-error/input-error.component';
 import {InputValueControls} from '../../../models/shared/input-value-controls';
 import {Subject} from 'rxjs';
+import {AsyncPipe} from "@angular/common";
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {PasswordModule} from "primeng/password";
 
 @Component({
   selector: 'app-input-text',
   standalone: true,
-  imports: [InputTextModule, FormsModule, InputErrorComponent, PasswordModule],
+  imports: [AsyncPipe, InputTextModule, FormsModule, InputErrorComponent, PasswordModule],
   // viewProviders: [{provide: ControlContainer, useExisting: NgForm}],
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',

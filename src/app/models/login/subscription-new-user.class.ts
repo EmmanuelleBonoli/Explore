@@ -3,13 +3,12 @@ import {InputValueControls} from '../shared/input-value-controls';
 import {LoginService} from "../../services/user/login.service";
 
 export class SubscriptionNewUser {
+  loginService: LoginService = inject(LoginService);
+
   pseudo: InputValueControls;
   email: InputValueControls;
   password: InputValueControls;
   confirmPassword: InputValueControls;
-
-  loginService: LoginService = inject(LoginService);
-
   fieldsForm: InputValueControls[];
 
   constructor(
@@ -98,7 +97,7 @@ export class SubscriptionNewUser {
   //   // TODO: remplacer par une vraie requête backend
   //   const isEmailNotUsed = await new Promise<boolean>((resolve) => {
   //     setTimeout(() => {
-  //       resolve(true); // Simule un retour indiquant si l'email est déjà utilisé
+  //       resolve(true);
   //     }, 1000);
   //   });
   //   return isEmailNotUsed;
@@ -108,7 +107,7 @@ export class SubscriptionNewUser {
   //   // TODO: remplacer par une vraie requête backend
   //   const isPseudoNotUsed = await new Promise<boolean>((resolve) => {
   //     setTimeout(() => {
-  //       resolve(true); // Simule un retour indiquant si le pseudo est déjà utilisé
+  //       resolve(true);
   //     }, 1000);
   //   });
   //   return isPseudoNotUsed;

@@ -1,6 +1,7 @@
 <div class="input-text">
   <label for="{{ inputControls.label }}">{{ inputControls.label }}</label>
-  @if (inputControls && inputControls.type !== "password") {
+  <!--  @if (inputControls | async) {-->
+  @if (inputControls.type !== "password") {
     <input
       #refInput="ngModel"
       pInputText
@@ -32,7 +33,6 @@
       />
     </div>
   }
-
   <app-input-error
     [refInput]="refInput"
     [inputControls]="inputControls"
