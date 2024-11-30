@@ -1,15 +1,17 @@
 import {inject} from "@angular/core";
+import {Observable} from "rxjs";
 import {InputValueControls} from '../shared/input-value-controls';
-import {LoginService} from "../../services/user/login.service";
+import {LoginFacadeService} from "../../services/user/login/login-facade.service";
 
 export class SubscriptionNewUser {
-  loginService: LoginService = inject(LoginService);
+  loginFacadeService: LoginFacadeService = inject(LoginFacadeService);
 
   pseudo: InputValueControls;
   email: InputValueControls;
   password: InputValueControls;
   confirmPassword: InputValueControls;
   fieldsForm: InputValueControls[];
+  fieldsResetPassword: InputValueControls[];
 
   constructor(
     email: InputValueControls = {
@@ -24,7 +26,7 @@ export class SubscriptionNewUser {
         minLength: 5,
         maxLength: null,
         pattern: '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$',
-        check: this.loginService.verifyEmail,
+        check: (): Observable<boolean> => this.loginFacadeService.verifyEmail(this.email.value),
         isCheckReturn: false,
         checkHelperText: 'Cet email est déjà utilisé.'
       },
@@ -40,7 +42,7 @@ export class SubscriptionNewUser {
         required: true,
         minLength: 4,
         maxLength: 12,
-        check: this.loginService.verifyPseudo,
+        check: (): Observable<boolean> => this.loginFacadeService.verifyPseudo(this.pseudo.value),
         isCheckReturn: false,
         checkHelperText: 'Ce pseudo est déjà utilisé.'
       },
@@ -72,7 +74,7 @@ export class SubscriptionNewUser {
         minLength: 8,
         maxLength: 16,
         pattern: `^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.* ).{8,16}$`,
-        check: this.verifyEqualityPassword(),
+        check: (): boolean => this.verifyEqualityPassword(),
         isCheckReturn: false,
         checkHelperText: "Les 2 mots de passe doivent être égaux."
       },
@@ -83,33 +85,14 @@ export class SubscriptionNewUser {
     this.password = password;
     this.confirmPassword = confirmPassword;
     this.fieldsForm = [this.pseudo, this.email, this.password, this.confirmPassword];
+    this.fieldsResetPassword = [this.password, this.confirmPassword];
   }
 
-  verifyEqualityPassword(): () => boolean {
-    return () => {
-      const password = this.password.value;
-      const confirmPassword = this.confirmPassword.value;
-      return password === confirmPassword;
-    };
+  verifyEqualityPassword(): boolean {
+    const password = this.password.value;
+    const confirmPassword = this.confirmPassword.value;
+    return this.loginFacadeService.verifyEqualityPassword(password, confirmPassword)
+
   }
 
-  // verifyEmail = async function (): Promise<boolean> {
-  //   // TODO: remplacer par une vraie requête backend
-  //   const isEmailNotUsed = await new Promise<boolean>((resolve) => {
-  //     setTimeout(() => {
-  //       resolve(true);
-  //     }, 1000);
-  //   });
-  //   return isEmailNotUsed;
-  // }
-
-  // verifyPseudo = async function (): Promise<boolean> {
-  //   // TODO: remplacer par une vraie requête backend
-  //   const isPseudoNotUsed = await new Promise<boolean>((resolve) => {
-  //     setTimeout(() => {
-  //       resolve(true);
-  //     }, 1000);
-  //   });
-  //   return isPseudoNotUsed;
-  // }
 }

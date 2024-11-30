@@ -4,7 +4,6 @@ import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {ForgetPasswordPageComponent} from "./pages/forget-password-page/forget-password-page.component";
 
 export const routes: Routes = [
-
   {
     path: '',
     component: DisplayActivitiesPageComponent,
