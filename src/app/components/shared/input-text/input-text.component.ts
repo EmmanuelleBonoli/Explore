@@ -3,14 +3,16 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ControlContainer, FormsModule, NgForm, NgModel} from '@angular/forms';
 import {InputErrorComponent} from '../input-error/input-error.component';
 import {InputValueControls} from '../../../models/shared/input-value-controls';
-import {Subject} from 'rxjs';
+import {firstValueFrom, Subject} from 'rxjs';
+import {Observable, isObservable} from 'rxjs';
+import {AsyncPipe} from "@angular/common";
 import {debounceTime, takeUntil} from 'rxjs/operators';
 import {PasswordModule} from "primeng/password";
 
 @Component({
   selector: 'app-input-text',
   standalone: true,
-  imports: [InputTextModule, FormsModule, InputErrorComponent, PasswordModule],
+  imports: [AsyncPipe, InputTextModule, FormsModule, InputErrorComponent, PasswordModule],
   // viewProviders: [{provide: ControlContainer, useExisting: NgForm}],
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',
@@ -21,8 +23,8 @@ export class InputTextComponent implements OnDestroy {
 
   @ViewChild('refInput') refInput!: NgModel;
 
-  private inputSubject = new Subject<string>();
-  private destroy$ = new Subject<void>();
+  private inputSubject: Subject<void> = new Subject<void>();
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor() {
     this.inputSubject
@@ -30,8 +32,8 @@ export class InputTextComponent implements OnDestroy {
         debounceTime(500),
         takeUntil(this.destroy$)
       )
-      .subscribe(async () => {
-        await this.validateInput();
+      .subscribe(() => {
+        this.validateInput();
       });
   }
 
@@ -40,12 +42,22 @@ export class InputTextComponent implements OnDestroy {
   * Si c'est le cas, vérifie l'existance de la fonction personnalisée et la lance
   * Gère la validation finale de l'input.
   */
-  private async validateInput(): Promise<void> {
+  private validateInput(): void {
     const inputIsValid = this.refInput.valid;
 
+    if (!inputIsValid) {
+      this.inputControls.isValid = false;
+      return
+    }
+
     if (inputIsValid && this.inputControls.controls.check) {
-      const checkResult = await this.inputControls.controls.check();
-      if (checkResult) {
+      const checkResult: boolean | Observable<boolean> = this.inputControls.controls.check();
+
+      const checkSuccess = isObservable(checkResult)
+        ? firstValueFrom(checkResult)
+        : checkResult;
+
+      if (checkSuccess) {
         this.inputControls.isValid = inputIsValid;
         this.inputControls.controls.isCheckReturn = false;
       } else {
@@ -56,13 +68,10 @@ export class InputTextComponent implements OnDestroy {
     if (inputIsValid && !this.inputControls.controls.check) {
       this.inputControls.isValid = inputIsValid;
     }
-    if (!inputIsValid) {
-      this.inputControls.isValid = false;
-    }
   }
 
   onInputChange(): void {
-    this.inputSubject.next('test');
+    this.inputSubject.next();
   }
 
   // Indispensable: compléter les Subjects pour éviter les fuites de mémoire

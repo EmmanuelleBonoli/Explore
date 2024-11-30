@@ -1,3 +1,5 @@
+import {Observable} from "rxjs";
+
 export interface InputValueControls {
   label: string;
   placeholder: string;
@@ -10,7 +12,7 @@ export interface InputValueControls {
     minLength: number | null;
     maxLength: number | null;
     pattern?: string;
-    check?: () => Promise<boolean> | boolean;
+    check?: () => Observable<boolean> | boolean;
     isCheckReturn?: boolean;
     checkHelperText?: string;
   };

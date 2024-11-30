@@ -1,3 +1,13 @@
+form {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    text-align: end;
+    color: #4b5563;
+    padding: 2%;
+  }
+}
 
 .button-form-container {
   display: flex;
@@ -5,6 +15,4 @@
   margin-top: 5%;
 }
 
-a {
-  text-align: right;
-}
+
