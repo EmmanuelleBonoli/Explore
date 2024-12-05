@@ -3,7 +3,7 @@ import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {TagModule} from 'primeng/tag';
 import {ImageModule} from 'primeng/image';
-import {Activity} from '../../../models/shared/activity.class';
+import {Activity} from '../../../models/activities/activity.class';
 import {NgStyle} from "@angular/common";
 
 @Component({

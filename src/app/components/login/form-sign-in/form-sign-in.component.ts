@@ -34,7 +34,7 @@ export class FormSignInComponent {
   newLogin: InputValueControls[] = new ConnectionUserClass().fieldsForm;
 
   checkFormValidity(): boolean {
-    return this.newLogin.every(control => control.isValid);
+    return this.utilsService.checkFormValidity(this.newLogin);
   }
 
   onSubmit(): void {

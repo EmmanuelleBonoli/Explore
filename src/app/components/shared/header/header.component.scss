@@ -1,9 +1,19 @@
 .header {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 15%;
+
   img {
     height: 28vh;
     padding: 2% 0 0 0;
     align-items: center;
+  }
+
+  .filter-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 60px;
   }
 }

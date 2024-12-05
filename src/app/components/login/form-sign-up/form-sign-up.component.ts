@@ -28,7 +28,7 @@ export class FormSignUpComponent {
   newInscription: InputValueControls[] = new SubscriptionNewUser().fieldsForm;
 
   checkFormValidity(): boolean {
-    return this.newInscription.every(control => control.isValid);
+    return this.utilsService.checkFormValidity(this.newInscription);
   }
 
   onSubmit(): void {
