@@ -2,8 +2,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  position: relative;
-  margin-bottom: 15%;
 
   img {
     height: 28vh;
@@ -11,9 +9,5 @@
     align-items: center;
   }
 
-  .filter-icon {
-    position: absolute;
-    bottom: 0px;
-    right: 60px;
-  }
+
 }
