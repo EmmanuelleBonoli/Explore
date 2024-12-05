@@ -79,7 +79,7 @@ export class ForgetPasswordComponent {
   }
 
   checkFormValidity(): boolean {
-    return this.passwords.every(control => control.isValid);
+    return this.utilsService.checkFormValidity(this.passwords);
   }
 
   onSubmitNewPassword(): void {
