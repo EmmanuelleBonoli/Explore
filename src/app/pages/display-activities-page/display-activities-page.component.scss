@@ -1,3 +1,8 @@
+.display-activities {
+  position: relative;
+  margin-top: 15%;
+}
+
 .absolute-tag {
   position: absolute;
   left: 5px;
@@ -5,3 +10,8 @@
   z-index: 5;
 }
 
+.filter-icon {
+  position: absolute;
+  top: -30px;
+  right: 60px;
+}
