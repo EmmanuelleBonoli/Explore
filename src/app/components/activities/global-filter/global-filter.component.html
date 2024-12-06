@@ -7,5 +7,14 @@
     showIcon="pi pi-filter"
     hideIcon="pi pi-times"
     transitionDelay="80"
-    buttonClassName="p-button"/>
+    buttonClassName="p-button">
+    <ng-template let-item pTemplate="item">
+      <app-activity-type
+        [icon]="item.icon"
+        [backgroundColor]="item.backgroundColor"
+        [iconColor]="item.iconColor"
+        [size]="'1.1rem'">
+      </app-activity-type>
+    </ng-template>
+  </p-speedDial>
 </div>
