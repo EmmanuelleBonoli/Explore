@@ -13,5 +13,7 @@ import {NgClass, NgStyle} from "@angular/common";
 })
 export class ActivityTypeComponent {
   @Input() icon!: string;
-  @Input() color!: string;
+  @Input() backgroundColor!: string;
+  @Input() iconColor!: string;
+  @Input() size!: string;
 }
