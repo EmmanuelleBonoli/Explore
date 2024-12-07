@@ -2,7 +2,7 @@ import {Component, OnInit, inject} from '@angular/core';
 import {SpeedDialModule} from 'primeng/speeddial';
 import {NgStyle, NgClass} from '@angular/common';
 import {MessageService, MenuItem} from "primeng/api";
-import {AllActivityTypes} from "../../../models/activities/all-activity-types";
+import {AllActivitiesTypes, Activity} from "../../../models/activities/all-activities.types";
 import {ActivityTypeComponent} from "../../shared/activity-type/activity-type.component";
 
 @Component({
@@ -16,11 +16,11 @@ export class GlobalFilterComponent implements OnInit {
 
   messageService: MessageService = inject(MessageService);
 
+  filtersAvailables: Activity[] = AllActivitiesTypes;
   itemsFilters!: MenuItem[];
-  filtersAvailables = AllActivityTypes;
 
   ngOnInit() {
-    this.itemsFilters = this.filtersAvailables.map((filter) => ({
+    this.itemsFilters = this.filtersAvailables.map((filter: Activity) => ({
       ...filter,
       command: () => {
         alert('It works!');
