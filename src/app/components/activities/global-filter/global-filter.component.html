@@ -9,12 +9,14 @@
     transitionDelay="80"
     buttonClassName="p-button">
     <ng-template let-item pTemplate="item">
-      <app-activity-type
+      <app-icon-activity
+        [type]="item.type"
         [icon]="item.icon"
         [backgroundColor]="item.backgroundColor"
         [iconColor]="item.iconColor"
-        [size]="'1.1rem'">
-      </app-activity-type>
+        [iconSize]="'1.1rem'"
+        (action)="applyFilter($event)">
+      </app-icon-activity>
     </ng-template>
   </p-speedDial>
 </div>
