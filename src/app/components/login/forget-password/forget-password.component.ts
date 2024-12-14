@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 import {LoginFacadeService} from "../../../services/user/login/login-facade.service";
 import {LoginResult} from "../../../models/login/login-result.type";
 import {HttpErrorResponse} from "@angular/common/http";
-import {AppRoutes} from "../../../app.routes";
+import {UserRoutes} from "../../../routes/user-routes";
 
 @Component({
   selector: 'app-forget-password',
@@ -98,7 +98,7 @@ export class ForgetPasswordComponent {
         if (result.type === "success") {
           this.resetStatus();
           this.statusResetPassword.isPasswordChanged = true;
-          setTimeout(() => this.router.navigate([AppRoutes.Login]), 800)
+          setTimeout(() => this.router.navigate([UserRoutes.Login]), 800)
         }
       },
       error: (err: HttpErrorResponse): void => {

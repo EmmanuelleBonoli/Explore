@@ -10,7 +10,7 @@ import {checkFormValidity, showToast} from "../../../services/utils/utils";
 import {InputValueControls} from "../../../models/shared/input-value-controls";
 import {LoginFacadeService} from "../../../services/user/login/login-facade.service";
 import {LoginResult} from "../../../models/login/login-result.type";
-import {AppRoutes} from "../../../app.routes";
+import {UserRoutes} from "../../../routes/user-routes";
 
 @Component({
   selector: 'app-form-sign-in',
@@ -47,7 +47,7 @@ export class FormSignInComponent {
       this.loginFacadeService.logIn(userLogInValue).subscribe({
         next: (isLogIn: LoginResult): void => {
           if (isLogIn.type === "success") {
-            this.router.navigate([AppRoutes.Home])
+            this.router.navigate([UserRoutes.Home])
           } else {
             showToast("", `${isLogIn.message}`, `${isLogIn.type}`)
           }

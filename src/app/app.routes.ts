@@ -3,29 +3,24 @@ import {DisplayActivitiesPageComponent} from './pages/display-activities-page/di
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {ForgetPasswordPageComponent} from "./pages/forget-password-page/forget-password-page.component";
 import {MainLayoutComponent} from "./layouts/main-layout/main-layout.component";
-
-export enum AppRoutes {
-  Home = '',
-  Login = 'login',
-  ForgetPassword = 'forgetPassword'
-}
+import {UserRoutes} from "./routes/user-routes";
 
 export const routes: Routes = [
   {
-    path: AppRoutes.Home,
+    path: UserRoutes.Home,
     component: MainLayoutComponent,
     children: [
       {
-        path: AppRoutes.Home,
+        path: UserRoutes.Home,
         component: DisplayActivitiesPageComponent
         // canActivate: [authGuard],
       },
       {
-        path: AppRoutes.Login,
+        path: UserRoutes.Login,
         component: LoginPageComponent,
       },
       {
-        path: AppRoutes.ForgetPassword,
+        path: UserRoutes.ForgetPassword,
         component: ForgetPasswordPageComponent,
       }
     ]

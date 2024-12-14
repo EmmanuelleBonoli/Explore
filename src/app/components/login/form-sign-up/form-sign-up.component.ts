@@ -10,7 +10,7 @@ import {showToast, checkFormValidity} from "../../../services/utils/utils";
 import {UserSignUp} from "../../../models/login/user-sign-up.type";
 import {LoginFacadeService} from "../../../services/user/login/login-facade.service";
 import {LoginResult} from "../../../models/login/login-result.type";
-import {AppRoutes} from "../../../app.routes";
+import {UserRoutes} from "../../../routes/user-routes";
 
 @Component({
   selector: 'app-form-sign-up',
@@ -48,7 +48,7 @@ export class FormSignUpComponent {
         next: (isSignUp: LoginResult): void => {
           showToast("", `${isSignUp.message}`, `${isSignUp.type}`)
           if (isSignUp.type === "success") {
-            this.router.navigate([AppRoutes.Home])
+            this.router.navigate([UserRoutes.Home])
           }
         },
         error: (err) => {
