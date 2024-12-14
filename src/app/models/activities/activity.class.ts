@@ -2,6 +2,7 @@ export class Activity {
   id = '';
   name = 'Activity';
   description = 'Description';
+  restaurant = false;
   dogFriendly = false;
   cycling = false;
   running = false;
@@ -13,6 +14,7 @@ export class Activity {
     id: string,
     name: string,
     description: string,
+    restaurant: boolean,
     dogFriendly: boolean,
     cycling: boolean,
     running: boolean,
@@ -23,6 +25,7 @@ export class Activity {
     this.id = id;
     this.name = name;
     this.description = description;
+    this.restaurant = restaurant;
     this.dogFriendly = dogFriendly;
     this.cycling = cycling;
     this.running = running;

@@ -6,7 +6,7 @@ import {UserSignUp} from "../../../models/login/user-sign-up.type";
 import {UserLogIn} from "../../../models/login/user-log-in.type";
 import {AuthFacadeService} from "../auth/auth-facade.service";
 import {EmailFacadeService} from "../../email/email-facade.service";
-import {UtilsService} from "../../utils/utils.service";
+import {errorApiService} from "../../utils/utils";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
@@ -16,7 +16,6 @@ export class LoginFacadeService {
   loginApiService: LoginApiService = inject(LoginApiService);
   authFacadeService: AuthFacadeService = inject(AuthFacadeService);
   emailFacadeService: EmailFacadeService = inject(EmailFacadeService);
-  utilsService: UtilsService = inject(UtilsService);
 
   /* ***************************************************
   * Inscriptions
@@ -53,7 +52,7 @@ export class LoginFacadeService {
         return this.emailFacadeService.sendCodeToResetPassword(email);
       }),
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "sendCodeToResetPassword")
+        return errorApiService(error, "sendCodeToResetPassword")
       })
     );
   }

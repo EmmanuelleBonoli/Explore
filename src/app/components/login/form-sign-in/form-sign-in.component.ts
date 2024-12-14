@@ -6,11 +6,11 @@ import {InputTextComponent} from "../../shared/input-text/input-text.component";
 import {ConnectionUserClass} from "../../../models/login/connection-user.class";
 import {PasswordModule} from 'primeng/password';
 import {InputTextModule} from "primeng/inputtext";
-import {UtilsService} from "../../../services/utils/utils.service";
+import {checkFormValidity, showToast} from "../../../services/utils/utils";
 import {InputValueControls} from "../../../models/shared/input-value-controls";
 import {LoginFacadeService} from "../../../services/user/login/login-facade.service";
-import {UserLogIn} from "../../../models/login/user-log-in.type";
 import {LoginResult} from "../../../models/login/login-result.type";
+import {UserRoutes} from "../../../routes/user-routes";
 
 @Component({
   selector: 'app-form-sign-in',
@@ -29,12 +29,11 @@ export class FormSignInComponent {
   @ViewChild('signInForm') signInForm!: NgForm;
   router: Router = inject(Router);
   loginFacadeService: LoginFacadeService = inject(LoginFacadeService);
-  utilsService: UtilsService = inject(UtilsService);
 
   newLogin: InputValueControls[] = new ConnectionUserClass().fieldsForm;
 
   checkFormValidity(): boolean {
-    return this.utilsService.checkFormValidity(this.newLogin);
+    return checkFormValidity(this.newLogin);
   }
 
   onSubmit(): void {
@@ -48,14 +47,14 @@ export class FormSignInComponent {
       this.loginFacadeService.logIn(userLogInValue).subscribe({
         next: (isLogIn: LoginResult): void => {
           if (isLogIn.type === "success") {
-            this.router.navigate([''])
+            this.router.navigate([UserRoutes.Home])
           } else {
-            this.utilsService.showToast("", `${isLogIn.message}`, `${isLogIn.type}`)
+            showToast("", `${isLogIn.message}`, `${isLogIn.type}`)
           }
         },
         error: (err) => {
           console.error("Erreur réseau :", err);
-          this.utilsService.showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
+          showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
         }
       });
     }

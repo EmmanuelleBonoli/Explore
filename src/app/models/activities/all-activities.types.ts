@@ -1,6 +1,6 @@
 export type ActivityType = 'run' | 'dogFriendly' | 'walk' | 'restaurant' | 'ride';
 
-export type Activity = {
+export type IconActivity = {
   type: ActivityType;
   icon: string;
   backgroundColor: string;
@@ -8,7 +8,7 @@ export type Activity = {
   tooltip: string;
 }
 
-export const AllActivitiesTypes: Activity[] = [
+export const AllActivitiesTypes: IconActivity[] = [
   {
     type: 'run',
     icon: 'fa-person-running',

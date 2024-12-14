@@ -1,5 +1,6 @@
 import {Injectable, inject} from '@angular/core';
 import {Router} from '@angular/router';
+import {UserRoutes} from "../../../routes/user-routes";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class AuthFacadeService {
   // Déconnexion de l'utilisateur (supprime le token)
   logout(): void {
     localStorage.removeItem(this._TOKEN_KEY);
-    this.router.navigate(['/']); // Redirige vers la page de login après déconnexion
+    this.router.navigate([UserRoutes.Home]); // Redirige vers la page de login après déconnexion
   }
 
   // Récupère le token actuel (si disponible)
