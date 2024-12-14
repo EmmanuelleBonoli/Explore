@@ -1,0 +1,10 @@
+.explore-appli {
+  display: flex;
+  flex-direction: column;
+  max-width: 100vw;
+  min-height: 100vh;
+
+  .push-footer {
+    flex-grow: 1;
+  }
+}

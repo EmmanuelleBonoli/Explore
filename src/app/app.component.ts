@@ -1,15 +1,12 @@
 import {Component, inject} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {FooterComponent} from './components/shared/footer/footer.component';
-import {CommonModule} from '@angular/common';
 import {PrimeNGConfig} from 'primeng/api';
-import {HeaderComponent} from './components/shared/header/header.component';
-import {ToastModule} from "primeng/toast"
+import {ToastModule} from "primeng/toast";
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, FooterComponent, HeaderComponent, ToastModule],
+  imports: [ToastModule, RouterModule],
   templateUrl: './app.component.html',
 
   styleUrls: ['./app.component.scss']

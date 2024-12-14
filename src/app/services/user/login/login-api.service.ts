@@ -2,14 +2,13 @@ import {Injectable, inject} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, catchError} from 'rxjs';
 import {LoginResult} from "../../../models/login/login-result.type";
-import {UtilsService} from "../../utils/utils.service";
+import {errorApiService} from "../../utils/utils";
 import {UserLogIn} from "../../../models/login/user-log-in.type";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginApiService {
-  utilsService: UtilsService = inject(UtilsService);
   private _http: HttpClient = inject(HttpClient);
 
   private readonly _BASE_API_URL: string = "http://localhost:3000/";
@@ -19,7 +18,7 @@ export class LoginApiService {
 
     return this._http.get<boolean>(`${this._BASE_API_URL}${endpoint}/${email}`).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "verifyEmail")
+        return errorApiService(error, "verifyEmail")
       })
     );
   }
@@ -29,7 +28,7 @@ export class LoginApiService {
 
     return this._http.get<boolean>(`${this._BASE_API_URL}${endpoint}/${pseudo}`).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "verifyPseudo")
+        return errorApiService(error, "verifyPseudo")
       })
     );
   }
@@ -40,7 +39,7 @@ export class LoginApiService {
 
     return this._http.get<boolean>(`${this._BASE_API_URL}${endpoint}`).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "saveCodeToResetPassword")
+        return errorApiService(error, "saveCodeToResetPassword")
       })
     );
   }
@@ -51,7 +50,7 @@ export class LoginApiService {
 
     return this._http.get<LoginResult>(`${this._BASE_API_URL}${endpoint}/${code}`).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "checkCodeToResetPassword")
+        return errorApiService(error, "checkCodeToResetPassword")
       })
     );
   }
@@ -63,7 +62,7 @@ export class LoginApiService {
 
     return this._http.post<LoginResult>(`${this._BASE_API_URL}${endpoint}`, body).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "resetPassword")
+        return errorApiService(error, "resetPassword")
       })
     );
   }
@@ -75,7 +74,7 @@ export class LoginApiService {
 
     return this._http.post<LoginResult>(`${this._BASE_API_URL}${endpoint}`, body).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "logIn")
+        return errorApiService(error, "logIn")
       })
     );
   }
@@ -87,7 +86,7 @@ export class LoginApiService {
 
     return this._http.post<LoginResult>(`${this._BASE_API_URL}${endpoint}`, body).pipe(
       catchError((error: HttpErrorResponse): Observable<never> => {
-        return this.utilsService.errorApiService(error, "signUp")
+        return errorApiService(error, "signUp")
       })
     );
   }

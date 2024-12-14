@@ -5,13 +5,14 @@ import {InputTextComponent} from "../../shared/input-text/input-text.component";
 import {InputValueControls} from "../../../models/shared/input-value-controls";
 import {ConnectionUserClass} from "../../../models/login/connection-user.class";
 import {FormsModule} from "@angular/forms";
-import {UtilsService} from "../../../services/utils/utils.service";
+import {showToast, checkFormValidity} from "../../../services/utils/utils";
 import {ToastModule} from 'primeng/toast';
 import {SubscriptionNewUser} from "../../../models/login/subscription-new-user.class";
 import {Router} from "@angular/router";
 import {LoginFacadeService} from "../../../services/user/login/login-facade.service";
 import {LoginResult} from "../../../models/login/login-result.type";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AppRoutes} from "../../../app.routes";
 
 @Component({
   selector: 'app-forget-password',
@@ -28,12 +29,18 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ForgetPasswordComponent {
   router: Router = inject(Router);
-  utilsService: UtilsService = inject(UtilsService);
   loginFacadeService: LoginFacadeService = inject(LoginFacadeService);
-  statusResetPassword: string = "start";
+  // statusResetPassword: string = "start";
   email: InputValueControls = new ConnectionUserClass().email;
   code!: number
   passwords: InputValueControls[] = new SubscriptionNewUser().fieldsResetPassword;
+
+  statusResetPassword = {
+    isStart: true,
+    isEmailSend: false,
+    isCodeSend: false,
+    isPasswordChanged: false
+  }
 
   onSubmitEmail(): void {
     if (!this.email.isValid) {
@@ -42,14 +49,15 @@ export class ForgetPasswordComponent {
 
     this.loginFacadeService.sendCodeToResetPassword(this.email.value).subscribe({
       next: (result: LoginResult): void => {
-        this.utilsService.showToast("", `${result.message}`, `${result.type}`)
+        showToast("", `${result.message}`, `${result.type}`)
         if (result.type === "success") {
-          this.statusResetPassword = "emailSend";
+          this.resetStatus();
+          this.statusResetPassword.isEmailSend = true
         }
       },
       error: (err: HttpErrorResponse): void => {
         console.error("Erreur réseau :", err);
-        this.utilsService.showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
+        showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
       }
     });
   }
@@ -63,38 +71,49 @@ export class ForgetPasswordComponent {
       this.loginFacadeService.checkCodeToResetPassword(this.code).subscribe({
         next: (result: LoginResult): void => {
           if (result.message) {
-            this.utilsService.showToast("", `${result.message}`, `${result.type}`)
+            showToast("", `${result.message}`, `${result.type}`)
           }
 
           if (result.type === "success") {
-            this.statusResetPassword = "codeSend";
+            this.resetStatus();
+            this.statusResetPassword.isCodeSend = true;
           }
         },
         error: (err: HttpErrorResponse): void => {
           console.error("Erreur réseau :", err);
-          this.utilsService.showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
+          showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
         }
       });
     }
   }
 
   checkFormValidity(): boolean {
-    return this.utilsService.checkFormValidity(this.passwords);
+    return checkFormValidity(this.passwords);
   }
 
   onSubmitNewPassword(): void {
     this.loginFacadeService.resetPasswordUser(this.passwords[0].value).subscribe({
       next: (result: LoginResult) => {
-        this.utilsService.showToast("", `${result.message}`, `${result.type}`)
+        showToast("", `${result.message}`, `${result.type}`)
         if (result.type === "success") {
-          this.statusResetPassword = "password changed!";
-          setTimeout(() => this.router.navigate(['/login']), 800)
+          this.resetStatus();
+          this.statusResetPassword.isPasswordChanged = true;
+          setTimeout(() => this.router.navigate([AppRoutes.Login]), 800)
         }
       },
       error: (err: HttpErrorResponse): void => {
         console.error("Erreur réseau :", err);
-        this.utilsService.showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
+        showToast("Erreur Réseau", "Veuillez vérifier votre connexion et réessayer.", "error");
       }
     })
+  }
+
+  private resetStatus(): void {
+    this.statusResetPassword = {
+      isStart: false,
+      isEmailSend: false,
+      isCodeSend: false,
+      isPasswordChanged: false
+    };
   }
 }
