@@ -1,0 +1,24 @@
+<form class="filters">
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-map"></i>
+    </p-inputgroup-addon>
+    <input
+      pInputText
+      type="text"
+      placeholder="Localisation..."
+      [(ngModel)]="searchUser.localisation"
+      name="localisation"
+    />
+  </p-inputgroup>
+  <p-selectbutton
+    name="filtersActivities"
+    [options]="itemsFilters"
+    size="large"
+    [multiple]="true"
+    optionLabel="justify">
+    <ng-template #item let-item>
+      <i [ngClass]="['fa-solid', item.icon]"></i>
+    </ng-template>
+  </p-selectbutton>
+</form>

@@ -32,8 +32,6 @@
               }
             ],
             "styles": [
-              "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeflex/primeflex.css",
               "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css",
               "src/styles.scss"

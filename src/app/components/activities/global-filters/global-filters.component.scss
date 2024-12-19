@@ -1,0 +1,22 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ::ng-deep .p-togglebutton-checked::before {
+    background-color: var(--primary-color);
+    color: white !important;
+  }
+
+  ::ng-deep .p-togglebutton.p-togglebutton-checked {
+    color: white !important;
+  }
+
+  /* Centrer l'input dans le groupe */
+  ::ng-deep {
+    .p-inputgroup {
+      width: 75%;
+    }
+  }
+
+}

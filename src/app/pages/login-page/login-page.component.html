@@ -1,8 +1,15 @@
-<p-tabView>
-  <p-tabPanel header="Connexion">
-    <app-form-sign-in></app-form-sign-in>
-  </p-tabPanel>
-  <p-tabPanel header="Inscription">
-    <app-form-sign-up></app-form-sign-up>
-  </p-tabPanel>
-</p-tabView>
+<p-tabs value="Connexion">
+  <p-tablist>
+    <p-tab value="Connexion">Connexion</p-tab>
+    <p-tab value="Inscription">Inscription</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="Connexion">
+      <app-form-sign-in></app-form-sign-in>
+    </p-tabpanel>
+    <p-tabpanel value="Inscription">
+      <app-form-sign-up></app-form-sign-up>
+    </p-tabpanel>
+  </p-tabpanels>
+
+</p-tabs>

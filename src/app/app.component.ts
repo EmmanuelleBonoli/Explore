@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {PrimeNGConfig} from 'primeng/api';
+import {PrimeNG} from 'primeng/config';
 import {ToastModule} from "primeng/toast";
 import {RouterModule} from "@angular/router";
 
@@ -13,6 +13,12 @@ import {RouterModule} from "@angular/router";
 })
 export class AppComponent {
   title = 'Explore';
-  primeConfig = (inject(PrimeNGConfig).ripple = true);
+
+  primeng: PrimeNG = inject(PrimeNG);
+
+  ngOnInit() {
+    this.primeng.ripple.set(true);
+  }
+
 
 }

@@ -1,18 +1,29 @@
-<div class="border-1 surface-border border-round m-2 p-3">
-  <div class="mb-3">
-    <div class="relative mx-auto">
+<p-card [style]="{width: '100vw', overflow: 'hidden'}">
+  <ng-template pTemplate="header">
+    <div class="relative mx-auto w-full">
+      <div class="flex top-0 left-0 absolute z-1 m-2 gap-1">
+        @for (type of activity.type; track $index) {
+          @for (icon of filtersAvailables; track $index) {
+            @if (type === icon.type) {
+              <app-icon-activity [icon]="icon"></app-icon-activity>
+            }
+          }
+        }
+      </div>
       <p-image alt="Card" [src]="activity.picture" [preview]="true" class="w-full border-round">
         <ng-template pTemplate="indicator">
-          <p>
-            {{ activity.description }}
-          </p>
+          <i class="pi pi-search"></i>
+        </ng-template>
+        <ng-template pTemplate="image">
+          <img [src]="activity.picture" [style]="{width: '100vw'}" alt="image"/>
+        </ng-template>
+
+        <ng-template pTemplate="preview" let-style="style" let-previewCallback="previewCallback">
+          <img [src]="activity.picture" alt="image" [style]="style"
+               (click)="previewCallback()"/>
         </ng-template>
       </p-image>
-      <p-tag
-        [value]="activity.description"
-        severity="success"
-        class="absolute"
-        [ngStyle]="{ 'left.px': 5, 'top.px': 5 }"/>
     </div>
-  </div>
-</div>
+  </ng-template>
+  <ng-template pTemplate="title">{{ activity.name }}</ng-template>
+</p-card>
