@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormSignInComponent} from "../../components/login/form-sign-in/form-sign-in.component";
 import {FormSignUpComponent} from "../../components/login/form-sign-up/form-sign-up.component";
-import {TabViewModule} from "primeng/tabview";
+import {TabsModule} from "primeng/tabs";
 
 @Component({
   selector: 'app-login-page',
@@ -9,7 +9,7 @@ import {TabViewModule} from "primeng/tabview";
   imports: [
     FormSignInComponent,
     FormSignUpComponent,
-    TabViewModule
+    TabsModule
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'

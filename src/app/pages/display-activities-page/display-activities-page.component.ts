@@ -9,8 +9,8 @@ import {CardModule} from 'primeng/card';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {FooterComponent} from '../../components/shared/footer/footer.component';
 import {ImageModule} from "primeng/image";
-import {ActivityTypeComponent} from "../../components/shared/activity-type/activity-type.component";
-import {GlobalFilterComponent} from "../../components/activities/global-filter/global-filter.component";
+import {GlobalFiltersComponent} from "../../components/activities/global-filters/global-filters.component";
+import {ScrollerModule} from 'primeng/scroller';
 
 @Component({
   selector: 'app-display-activities-page',
@@ -24,8 +24,8 @@ import {GlobalFilterComponent} from "../../components/activities/global-filter/g
     FooterComponent,
     ScrollPanelModule,
     ImageModule,
-    ActivityTypeComponent,
-    GlobalFilterComponent
+    GlobalFiltersComponent,
+    ScrollerModule
   ],
   templateUrl: './display-activities-page.component.html',
   styleUrl: './display-activities-page.component.scss',
@@ -33,6 +33,8 @@ import {GlobalFilterComponent} from "../../components/activities/global-filter/g
 export class DisplayActivitiesPageComponent implements OnInit {
   activities: Activity[] = [];
   dataActivitiesService: DataActivitiesService = inject(DataActivitiesService);
+
+  isVisibleSearchInputs: boolean = false;
 
   // responsiveOptions: any[] | undefined;
 
@@ -56,6 +58,10 @@ export class DisplayActivitiesPageComponent implements OnInit {
     //       numScroll: 1
     //     }
     //   ];
+  }
+
+  showSearchInputs(): void {
+    this.isVisibleSearchInputs = !this.isVisibleSearchInputs;
   }
 
   // getSeverity(status: string): string | undefined {

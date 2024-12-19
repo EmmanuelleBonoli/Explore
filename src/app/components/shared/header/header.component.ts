@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {GlobalFilterComponent} from "../../activities/global-filter/global-filter.component";
+import {GlobalFiltersComponent} from "../../activities/global-filters/global-filters.component";
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    GlobalFilterComponent
+    GlobalFiltersComponent
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

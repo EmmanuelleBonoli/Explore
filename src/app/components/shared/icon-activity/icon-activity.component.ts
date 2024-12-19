@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgStyle} from "@angular/common";
+import {IconActivity} from "../../../models/activities/all-activities.types";
 
 @Component({
   selector: 'app-icon-activity',
@@ -12,16 +13,12 @@ import {NgClass, NgStyle} from "@angular/common";
   styleUrl: './icon-activity.component.scss'
 })
 export class IconActivityComponent {
-  @Input() type!: string;
-  @Input({required: true}) icon!: string;
-  @Input({required: true}) backgroundColor!: string;
-  @Input({required: true}) iconColor!: string;
-  @Input({required: true}) iconSize!: string;
+  @Input() icon!: IconActivity;
   @Output() action: EventEmitter<string> = new EventEmitter();
 
   doSomething(): void {
     if (this.action) {
-      this.action.emit(this.type);
+      this.action.emit(this.icon.type);
     }
   }
 
