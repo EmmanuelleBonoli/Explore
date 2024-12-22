@@ -18,6 +18,7 @@ import {
 import {
   ActivitiesScrollerComponent
 } from "../../components/activities/activities-scroller/activities-scroller.component";
+import {MenuComponent} from "../../components/activities/menu/menu.component";
 
 @Component({
   selector: 'app-display-activities-page',
@@ -35,7 +36,8 @@ import {
     NgClass,
     ScrollerModule,
     ActivitiesCarouselComponent,
-    ActivitiesScrollerComponent
+    ActivitiesScrollerComponent,
+    MenuComponent
   ],
   templateUrl: './display-activities-page.component.html',
   styleUrl: './display-activities-page.component.scss',

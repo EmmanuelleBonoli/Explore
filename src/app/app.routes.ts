@@ -5,6 +5,8 @@ import {ForgetPasswordPageComponent} from "./pages/forget-password-page/forget-p
 import {MainLayoutComponent} from "./layouts/main-layout/main-layout.component";
 import {UserRoutes} from "./routes/user-routes";
 import {DetailsActivityPageComponent} from "./pages/details-activity-page/details-activity-page.component";
+import {ProfilePageComponent} from "./pages/profile-page/profile-page.component";
+import {CreateActivityPageComponent} from "./pages/create-activity-page/create-activity-page.component";
 
 export const routes: Routes = [
   {
@@ -27,6 +29,14 @@ export const routes: Routes = [
       {
         path: UserRoutes.ForgetPassword,
         component: ForgetPasswordPageComponent,
+      },
+      {
+        path: UserRoutes.Profile,
+        component: ProfilePageComponent,
+      },
+      {
+        path: UserRoutes.CreateActivity,
+        component: CreateActivityPageComponent,
       }
     ]
   },

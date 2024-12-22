@@ -1,0 +1,18 @@
+<p-menubar class="menu">
+
+  <div class="flex align-items-center justify-content-between" style="width: 90vw">
+    <div class="flex gap-3">
+      <i (click)="returnHome()" class="pi pi-home" style="font-size: 1.3rem; color: var(--primary-color)"></i>
+      <i class="pi pi-search" style="font-size: 1.3rem; color: var(--primary-color)"></i>
+    </div>
+    <i (click)="createActivity()" class="pi pi-plus-circle" style="font-size: 2.5rem; color: var(--primary-color)"></i>
+    <p-avatar (click)="seeProfile()" image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+              shape="circle"/>
+  </div>
+
+  <!--  <ng-template #end>-->
+  <!--    <div class="flex items-center gap-2">-->
+  <!--    -->
+  <!--    </div>-->
+  <!--  </ng-template>-->
+</p-menubar>

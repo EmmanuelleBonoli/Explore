@@ -7,6 +7,7 @@ import {DataActivitiesService} from "../../../services/activities/data-activitie
 import {Skeleton} from "primeng/skeleton";
 import {ButtonModule} from 'primeng/button';
 import {NgStyle} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-activities-scroller',
@@ -23,6 +24,7 @@ import {NgStyle} from "@angular/common";
 })
 export class ActivitiesScrollerComponent {
   dataActivitiesServices: DataActivitiesService = inject(DataActivitiesService);
+  router: Router = inject(Router);
   @ViewChild('sc') sc!: Scroller;
   @Input() activities!: Activity[];
   // activities: Activity[] = [];
@@ -37,6 +39,10 @@ export class ActivitiesScrollerComponent {
   //     .flat();
   // }
 
+  seeDetails(activityId: string): void {
+    this.router.navigate([`activity/${activityId}`]);
+  }
+  
   resetScroll() {
     this.sc.scrollToIndex(0, 'smooth');
   }

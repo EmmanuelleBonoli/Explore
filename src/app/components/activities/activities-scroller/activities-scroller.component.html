@@ -13,13 +13,13 @@
     styleClass="border border-surface"
     [style]="{'width': '100%', height: orientation==='horizontal'?'250px':'600px'}">
     <ng-template #item let-item>
-      <div class="flex flex-col justify-content-center">
+      <div class="flex flex-col justify-content-center" (click)="seeDetails(item.id)">
         <div class="flex-col relative"
              [ngStyle]="{
-    height: orientation === 'horizontal' ? '220px' : 'auto',
-    width: orientation === 'vertical' ? '100vw' : 'auto',
-    paddingRight: orientation === 'horizontal' ? '0.8rem' : '0'
-  }">
+             height: orientation === 'horizontal' ? '220px' : 'auto',
+             width: orientation === 'vertical' ? '100vw' : 'auto',
+             paddingRight: orientation === 'horizontal' ? '0.8rem' : '0'
+        }">
           <div class="flex top-0 left-0 absolute z-1 p-3">
             <app-icon-activity [activityTypes]="item.type"></app-icon-activity>
           </div>
@@ -56,7 +56,7 @@
     </ng-template>
   </p-scroller>
   <p-button
-    class="flex justify-content-end p-2"
+    class="flex justify-content-end p-2 mb-7"
     [icon]="orientation==='horizontal'?'pi pi-arrow-left': 'pi pi-arrow-up'"
     [rounded]="true"
     (click)="resetScroll()"
