@@ -1,0 +1,12 @@
+<p-carousel
+  [value]="activities"
+  [numVisible]="1"
+  [circular]="true"
+  [showNavigators]="false"
+  [showIndicators]="false"
+  autoplayInterval="5000"
+>
+  <ng-template let-activity pTemplate="item">
+    <app-activity-card [activity]="activity"></app-activity-card>
+  </ng-template>
+</p-carousel>

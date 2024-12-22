@@ -1,7 +1,12 @@
 .display-activities {
   position: relative;
   margin-top: 15%;
+
+  h3 {
+    padding-left: 5%;
+  }
 }
+
 
 .absolute-tag {
   position: absolute;
@@ -14,4 +19,14 @@
   position: absolute;
   top: -60px;
   right: 30px;
+}
+
+:host ::ng-deep {
+  .p-scroller-viewport {
+    flex: none;
+  }
+
+  p-skeleton {
+    width: 100%;
+  }
 }

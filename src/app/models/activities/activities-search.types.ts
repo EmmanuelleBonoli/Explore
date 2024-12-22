@@ -1,8 +1,10 @@
+import {ActivityType} from "./all-activities.types";
+
+export const defaultFilters: ActivityType[] = [
+  'run', 'dogFriendly', 'walk', 'restaurant', 'ride']
+
+
 export type ActivitiesSearch = {
   localisation: string;
-  isRide: boolean;
-  isWalk: boolean;
-  isRun: boolean;
-  isDogFriendly: boolean;
-  isRestaurant: boolean;
+  types: ActivityType[];
 }

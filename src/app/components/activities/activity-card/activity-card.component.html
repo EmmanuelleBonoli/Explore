@@ -1,14 +1,8 @@
-<p-card [style]="{width: '100vw', overflow: 'hidden'}">
+<p-card [style]="{width: '100vw', overflow: 'hidden'}" (click)="seeDetails()">
   <ng-template pTemplate="header">
     <div class="relative mx-auto w-full">
-      <div class="flex top-0 left-0 absolute z-1 m-2 gap-1">
-        @for (type of activity.type; track $index) {
-          @for (icon of filtersAvailables; track $index) {
-            @if (type === icon.type) {
-              <app-icon-activity [icon]="icon"></app-icon-activity>
-            }
-          }
-        }
+      <div class="flex top-0 left-0 absolute z-1">
+        <app-icon-activity [activityTypes]="activity.type"></app-icon-activity>
       </div>
       <p-image alt="Card" [src]="activity.picture" [preview]="true" class="w-full border-round">
         <ng-template pTemplate="indicator">

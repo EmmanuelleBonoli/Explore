@@ -6,17 +6,20 @@
     <input
       pInputText
       type="text"
-      placeholder="Localisation..."
+      placeholder="Ex: Nantes, Paris..."
       [(ngModel)]="searchUser.localisation"
+      (ngModelChange)="applySearch()"
       name="localisation"
     />
   </p-inputgroup>
   <p-selectbutton
     name="filtersActivities"
     [options]="itemsFilters"
+    [(ngModel)]="searchUser.types"
+    (ngModelChange)="applySearch()"
     size="large"
     [multiple]="true"
-    optionLabel="justify">
+    [optionValue]="'type'">
     <ng-template #item let-item>
       <i [ngClass]="['fa-solid', item.icon]"></i>
     </ng-template>

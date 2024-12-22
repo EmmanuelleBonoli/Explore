@@ -8,7 +8,7 @@
       [type]="inputControls.type"
       [placeholder]="inputControls.placeholder"
       [(ngModel)]="inputControls.value"
-      (ngModelChange)="onInputChange()"
+      (ngModelChange)="validateInput()"
       [required]="inputControls.controls.required"
       [minlength]="inputControls.controls.minLength"
       [maxlength]="inputControls.controls.maxLength"
@@ -20,7 +20,7 @@
       <p-password
         #refInput="ngModel"
         [(ngModel)]="inputControls.value"
-        (ngModelChange)="onInputChange()"
+        (ngModelChange)="validateInput()"
         name="password"
         [toggleMask]="true"
         [feedback]="false"

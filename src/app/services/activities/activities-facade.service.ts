@@ -3,6 +3,7 @@ import {ActivitiesApiService} from "./activities-api.service";
 import {ActivitiesStoreService} from "./activities-store.service";
 import {Activity} from "../../models/activities/activity.class";
 import {Observable, tap, switchMap} from 'rxjs';
+import {ActivitiesSearch} from "../../models/activities/activities-search.types";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ActivitiesFacadeService {
   activitiesApiService: ActivitiesApiService = inject(ActivitiesApiService);
   activitiesStoreServices: ActivitiesStoreService = inject(ActivitiesStoreService);
 
-  getAllActivitiesCategories(filter: string): Observable<Activity[]> {
+  getAllActivitiesCategories(filter: ActivitiesSearch): Observable<Activity[]> {
     console.log('filter activity filter activity', filter);
     return this.activitiesApiService.getAllActivities(filter).pipe(
       switchMap((activities: Activity[]) => this.activitiesStoreServices.setAllActivities(activities)),
