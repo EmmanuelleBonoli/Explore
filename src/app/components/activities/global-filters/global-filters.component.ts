@@ -1,13 +1,12 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NgStyle, NgClass} from '@angular/common';
-import {MenuItem} from "primeng/api";
 import {ActivitiesFacadeService} from "../../../services/activities/activities-facade.service";
 import {AllActivitiesTypes, IconActivity} from "../../../models/activities/all-activities.types";
 import {SelectButton} from 'primeng/selectbutton';
 import {InputGroup} from 'primeng/inputgroup';
 import {InputGroupAddonModule} from 'primeng/inputgroupaddon';
 import {InputTextModule} from 'primeng/inputtext';
-import {ActivitiesSearch} from "../../../models/activities/activities-search.types";
+import {ActivitiesSearch, defaultFilters} from "../../../models/activities/activities-search.types";
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -17,31 +16,24 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './global-filters.component.html',
   styleUrl: './global-filters.component.scss'
 })
-export class GlobalFiltersComponent implements OnInit {
+export class GlobalFiltersComponent {
 
   activitiesFacadeService: ActivitiesFacadeService = inject(ActivitiesFacadeService);
 
-  filtersAvailables: IconActivity[] = AllActivitiesTypes;
-  itemsFilters!: MenuItem[];
+  itemsFilters: IconActivity[] = AllActivitiesTypes;
   searchUser: ActivitiesSearch = {
     localisation: '',
-    isDogFriendly: true,
-    isRestaurant: true,
-    isRide: true,
-    isRun: true,
-    isWalk: true
+    types: defaultFilters
   };
 
-  ngOnInit() {
-    this.itemsFilters = this.filtersAvailables.map((filter: IconActivity) => ({
-      ...filter,
-    }));
-    console.log(this.itemsFilters);
-  }
+  private debounceTimer?: ReturnType<typeof setTimeout>;
 
-  applyFilters(filtersActivity: string): void {
-    if (filtersActivity) {
-      this.activitiesFacadeService.getAllActivitiesCategories(filtersActivity)
+  applySearch(): void {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
     }
+    this.debounceTimer = setTimeout(() => {
+      this.activitiesFacadeService.getAllActivitiesCategories(this.searchUser)
+    }, 2000)
   }
 }

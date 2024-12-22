@@ -1,5 +1,6 @@
 export enum UserRoutes {
   Home = '',
   Login = 'login',
-  ForgetPassword = 'forgetPassword'
+  ForgetPassword = 'forgetPassword',
+  Activity = 'activity/:id'
 }

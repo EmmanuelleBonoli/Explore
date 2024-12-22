@@ -1,67 +1,56 @@
 <div class="display-activities">
-  <div>
-    <p-button icon="pi pi-search" class="filter-icon" (click)="showSearchInputs()" [rounded]="true" [raised]="true"/>
-    @if (isVisibleSearchInputs) {
-      <app-global-filter></app-global-filter>
-    }
+  <p-button icon="pi pi-search" class="filter-icon" (click)="showSearchInputs()" [rounded]="true" [raised]="true"/>
+  @if (isVisibleSearchInputs) {
+    <app-global-filter></app-global-filter>
+  }
+  <div class="flex flex-column gap-3">
+    <h3>Les mieux notés</h3>
+    <app-activities-carousel [activities]="activities"></app-activities-carousel>
+
+    <h3>Proche de chez vous</h3>
+    <app-activities-scroller [activities]="activities" orientation="horizontal"></app-activities-scroller>
+
+    <h3>Les derniers ajouts</h3>
+    <app-activities-scroller [activities]="activities" orientation="vertical"></app-activities-scroller>
   </div>
-  <div>
-    <h3>Les nouveautés</h3>
-    <p-carousel
-      [value]="activities"
-      [numVisible]="1"
-      [circular]="true"
-      [showNavigators]="false"
-      [showIndicators]="true"
-      autoplayInterval="5000"
-    >
-      <ng-template let-activity pTemplate="item">
-        <app-activity-card [activity]="activity"></app-activity-card>
-      </ng-template>
-    </p-carousel>
-    <div>
-      <h3>Proche de chez vous</h3>
-      <div class="card flex justify-content-center">
-        <p-scroller
-          [items]="activities"
-          scrollHeight="200px"
-          orientation="horizontal"
-          styleClass="border border-surface"
-        >
-          <ng-template pTemplate="item" let-activity>
-            <div
-              class="flex items-center p-2"
-            >
-              <img [src]="activity.picture" [style]="{width: '60vw'}"/>
-            </div>
-          </ng-template>
-        </p-scroller>
-      </div>
-      <p-scrollPanel
-        [style]="{width: '1000px', height: '200px' , overflowY: 'auto'}">
-        <div class="image-container" style="display: flex">
-          @for (activity of activities; track $index) {
-            <div class="activity-card">
-              <p-image
-                width="80%" alt="Card"
-                [src]="activity.picture" [preview]="true"
-                class="w-full border-round activity-image">
-                <ng-template pTemplate="indicator">
-                  <h1>{{ activity.name }}</h1>
-                  <p>
-                    {{ activity.description }}
-                  </p>
-                </ng-template>
-              </p-image>
-            </div>
-          }
-        </div>
-      </p-scrollPanel>
-    </div>
-    <h3>Derniers ajouts de vos amis</h3>
-
-
-  </div>
-
 </div>
+<!--      <div class="card flex justify-center">-->
 
+<!--        <p-scroller-->
+<!--          [items]="activities"-->
+<!--          [itemSize]="25 * 7"-->
+<!--          [delay]="250"-->
+<!--          styleClass="border border-surface"-->
+<!--        >-->
+<!--          <ng-template #activity let-activity>-->
+<!--            <div-->
+<!--              class="flex items-center p-2"-->
+<!--            >-->
+<!--              <img [src]="activity.picture" [style]="{width: '60vw'}"/>-->
+<!--            </div>-->
+<!--          </ng-template>-->
+<!--        </p-scroller>-->
+<!--      </div>-->
+<!--      <h3>Les derniers ajouts</h3>-->
+<!--      <p-scrollPanel-->
+<!--        [style]="{width: '1000px', height: '200px' , overflowY: 'auto'}">-->
+<!--        <div class="image-container" style="display: flex">-->
+<!--          @for (activity of activities; track $index) {-->
+<!--            <div class="activity-card">-->
+<!--              <p-image-->
+<!--                width="80%" alt="Card"-->
+<!--                [src]="activity.picture" [preview]="true"-->
+<!--                class="w-full border-round activity-image">-->
+<!--                <ng-template pTemplate="indicator">-->
+<!--                  <h1>{{ activity.name }}</h1>-->
+<!--                  <p>-->
+<!--                    {{ activity.description }}-->
+<!--                  </p>-->
+<!--                </ng-template>-->
+<!--              </p-image>-->
+<!--            </div>-->
+<!--          }-->
+<!--        </div>-->
+<!--      </p-scrollPanel>-->
+<!--    </div>-->
+<!--  </div>-->

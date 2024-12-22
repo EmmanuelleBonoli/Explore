@@ -4,6 +4,7 @@ import {API_ENDPOINTS_ACTIVITIES} from "../../routes/api-routes";
 import {Observable} from 'rxjs';
 import {Activity} from "../../models/activities/activity.class";
 import {ActivitiesParamsNextPage} from "../../models/activities/activities-params";
+import {ActivitiesSearch} from "../../models/activities/activities-search.types";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,20 @@ import {ActivitiesParamsNextPage} from "../../models/activities/activities-param
 export class ActivitiesApiService {
   private _http: HttpClient = inject(HttpClient);
 
-  getAllActivities(filter: string): Observable<Activity[]> {
-    return this._http.get<Activity[]>(`${API_ENDPOINTS_ACTIVITIES.getAllActivitiesCategories}/filter?=${filter}`);
+  getAllActivities(filter: ActivitiesSearch): Observable<Activity[]> {
+    const {localisation, types} = filter;
+    let allActivitiesUrl: string = API_ENDPOINTS_ACTIVITIES.getAllActivitiesCategories
+
+    if (localisation) {
+      allActivitiesUrl += `/loc=${localisation}`;
+    }
+
+    if (types.length > 0) {
+      allActivitiesUrl += `/types=${types.join(',')}`;
+    }
+
+    // todo : prévoir le cas où aucun types d'activité n'est sélectionné, renvoyer message à l'utilisateur sans interroger le back
+    return this._http.get<Activity[]>(allActivitiesUrl);
   }
 
   getNextPageActivities(params: ActivitiesParamsNextPage): Observable<Activity[]> {

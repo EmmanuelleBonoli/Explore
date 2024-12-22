@@ -1,12 +1,11 @@
-import {Component, Input, OnDestroy, ViewChild} from '@angular/core';
+import {Component, Input, ViewChild} from '@angular/core';
 import {InputTextModule} from 'primeng/inputtext';
 import {ControlContainer, FormsModule, NgForm, NgModel} from '@angular/forms';
 import {InputErrorComponent} from '../input-error/input-error.component';
 import {InputValueControls} from '../../../models/shared/input-value-controls';
-import {firstValueFrom, Subject} from 'rxjs';
+import {firstValueFrom} from 'rxjs';
 import {Observable, isObservable} from 'rxjs';
 import {AsyncPipe} from "@angular/common";
-import {debounceTime, takeUntil} from 'rxjs/operators';
 import {PasswordModule} from "primeng/password";
 
 @Component({
@@ -17,67 +16,51 @@ import {PasswordModule} from "primeng/password";
   templateUrl: './input-text.component.html',
   styleUrl: './input-text.component.scss',
 })
-export class InputTextComponent implements OnDestroy {
+export class InputTextComponent {
   @Input() inputControls!: InputValueControls;
   @Input() autocomplete!: boolean;
 
   @ViewChild('refInput') refInput!: NgModel;
 
-  private inputSubject: Subject<void> = new Subject<void>();
-  private destroy$: Subject<void> = new Subject<void>();
-
-  constructor() {
-    this.inputSubject
-      .pipe(
-        debounceTime(500),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.validateInput();
-      });
-  }
+  private INPUT_DELAY: number = 500;
+  private debounceTimer?: ReturnType<typeof setTimeout>;
 
   /*
   * Vérifie que l'input répond à ses règles de format,
   * Si c'est le cas, vérifie l'existance de la fonction personnalisée et la lance
   * Gère la validation finale de l'input.
   */
-  private validateInput(): void {
-    const inputIsValid = this.refInput.valid;
-
-    if (!inputIsValid) {
-      this.inputControls.isValid = false;
-      return
+  validateInput(): void {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
     }
 
-    if (inputIsValid && this.inputControls.controls.check) {
-      const checkResult: boolean | Observable<boolean> = this.inputControls.controls.check();
+    this.debounceTimer = setTimeout(() => {
+      const inputIsValid = this.refInput.valid;
 
-      const checkSuccess = isObservable(checkResult)
-        ? firstValueFrom(checkResult)
-        : checkResult;
-
-      if (checkSuccess) {
-        this.inputControls.isValid = inputIsValid;
-        this.inputControls.controls.isCheckReturn = false;
-      } else {
+      if (!inputIsValid) {
         this.inputControls.isValid = false;
-        this.inputControls.controls.isCheckReturn = true;
+        return
       }
-    }
-    if (inputIsValid && !this.inputControls.controls.check) {
-      this.inputControls.isValid = inputIsValid;
-    }
-  }
 
-  onInputChange(): void {
-    this.inputSubject.next();
-  }
+      if (inputIsValid && this.inputControls.controls.check) {
+        const checkResult: boolean | Observable<boolean> = this.inputControls.controls.check();
 
-  // Indispensable: compléter les Subjects pour éviter les fuites de mémoire
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-    this.inputSubject.complete();
+        const checkSuccess = isObservable(checkResult)
+          ? firstValueFrom(checkResult)
+          : checkResult;
+
+        if (checkSuccess) {
+          this.inputControls.isValid = inputIsValid;
+          this.inputControls.controls.isCheckReturn = false;
+        } else {
+          this.inputControls.isValid = false;
+          this.inputControls.controls.isCheckReturn = true;
+        }
+      }
+      if (inputIsValid && !this.inputControls.controls.check) {
+        this.inputControls.isValid = inputIsValid;
+      }
+    }, this.INPUT_DELAY)
   }
 }
