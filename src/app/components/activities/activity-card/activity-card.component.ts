@@ -5,7 +5,7 @@ import {TagModule} from 'primeng/tag';
 import {ImageModule} from 'primeng/image';
 import {Activity} from '../../../models/activities/activity.class';
 import {NgStyle} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {IconActivityComponent} from "../../shared/icon-activity/icon-activity.component";
 
 @Component({
