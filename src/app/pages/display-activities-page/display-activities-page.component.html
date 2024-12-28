@@ -1,56 +1,31 @@
 <div class="display-activities">
-  <p-button icon="pi pi-search" class="filter-icon" (click)="showSearchInputs()" [rounded]="true" [raised]="true"/>
-  @if (isVisibleSearchInputs) {
-    <app-global-filter></app-global-filter>
-  }
-  <div class="flex flex-column gap-3">
-    <h3>Les mieux notés</h3>
-    <app-activities-carousel [activities]="activities"></app-activities-carousel>
-
-    <h3>Proche de chez vous</h3>
-    <app-activities-scroller [activities]="activities" orientation="horizontal"></app-activities-scroller>
-
-    <h3>Les derniers ajouts</h3>
-    <app-activities-scroller [activities]="activities" orientation="vertical"></app-activities-scroller>
+  <div class="card flex justify-content-end align-content-end p-3 gap-5">
+    <p-selectbutton [options]="displayActivitiesOptions" [(ngModel)]="choiceDisplayActivities" optionValue="option">
+      <ng-template #item let-item>
+        <i [class]="item.icon"></i>
+      </ng-template>
+    </p-selectbutton>
+    <p-button icon="pi pi-search" class="filter-icon" (click)="showSearchInputs()" [rounded]="true" [raised]="true"/>
   </div>
-</div>
-<!--      <div class="card flex justify-center">-->
+  @if (isVisibleSearchInputs) {
+    <app-global-filter [searchUser]="searchUser"></app-global-filter>
+  }
 
-<!--        <p-scroller-->
-<!--          [items]="activities"-->
-<!--          [itemSize]="25 * 7"-->
-<!--          [delay]="250"-->
-<!--          styleClass="border border-surface"-->
-<!--        >-->
-<!--          <ng-template #activity let-activity>-->
-<!--            <div-->
-<!--              class="flex items-center p-2"-->
-<!--            >-->
-<!--              <img [src]="activity.picture" [style]="{width: '60vw'}"/>-->
-<!--            </div>-->
-<!--          </ng-template>-->
-<!--        </p-scroller>-->
-<!--      </div>-->
-<!--      <h3>Les derniers ajouts</h3>-->
-<!--      <p-scrollPanel-->
-<!--        [style]="{width: '1000px', height: '200px' , overflowY: 'auto'}">-->
-<!--        <div class="image-container" style="display: flex">-->
-<!--          @for (activity of activities; track $index) {-->
-<!--            <div class="activity-card">-->
-<!--              <p-image-->
-<!--                width="80%" alt="Card"-->
-<!--                [src]="activity.picture" [preview]="true"-->
-<!--                class="w-full border-round activity-image">-->
-<!--                <ng-template pTemplate="indicator">-->
-<!--                  <h1>{{ activity.name }}</h1>-->
-<!--                  <p>-->
-<!--                    {{ activity.description }}-->
-<!--                  </p>-->
-<!--                </ng-template>-->
-<!--              </p-image>-->
-<!--            </div>-->
-<!--          }-->
-<!--        </div>-->
-<!--      </p-scrollPanel>-->
-<!--    </div>-->
-<!--  </div>-->
+  @if (choiceDisplayActivities === 'list') {
+    <div class="flex flex-column gap-3">
+      <h3>Les mieux notés</h3>
+      <app-activities-carousel [activities]="activities"></app-activities-carousel>
+
+      <h3>Proche de chez vous</h3>
+      <app-activities-scroller [activities]="activities" orientation="horizontal"></app-activities-scroller>
+
+      <h3>Les derniers ajouts</h3>
+      <app-activities-scroller [activities]="activities" orientation="vertical"></app-activities-scroller>
+    </div>
+  } @else {
+    <div style="height: 400px">
+      <app-map [searchLocalisation]="searchUser.localisation"></app-map>
+    </div>
+
+  }
+</div>

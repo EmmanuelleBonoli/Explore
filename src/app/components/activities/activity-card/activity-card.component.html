@@ -1,23 +1,16 @@
-<p-card [style]="{width: '100vw', overflow: 'hidden'}" (click)="seeDetails()">
+<p-card [style]="{width: '100%', overflow: 'hidden'}" (click)="seeDetails()">
   <ng-template pTemplate="header">
     <div class="relative mx-auto w-full">
-      <div class="flex top-0 left-0 absolute z-1">
+      <div class="flex top-0 left-0 absolute z-1 mt-3 ml-3">
         <app-icon-activity [activityTypes]="activity.type"></app-icon-activity>
       </div>
-      <p-image alt="Card" [src]="activity.picture" [preview]="true" class="w-full border-round">
-        <ng-template pTemplate="indicator">
-          <i class="pi pi-search"></i>
-        </ng-template>
-        <ng-template pTemplate="image">
-          <img [src]="activity.picture" [style]="{width: '100vw'}" alt="image"/>
-        </ng-template>
-
-        <ng-template pTemplate="preview" let-style="style" let-previewCallback="previewCallback">
-          <img [src]="activity.picture" alt="image" [style]="style"
-               (click)="previewCallback()"/>
-        </ng-template>
-      </p-image>
+      <img [src]="activity.picture" [ngStyle]="{width: '100vw'}" alt="image"/>
     </div>
   </ng-template>
   <ng-template pTemplate="title">{{ activity.name }}</ng-template>
+  <app-activities-levels
+    [rating]="activity.rating"
+    [difficulty]="activity.difficulty"
+    [duration]="activity.duration"></app-activities-levels>
+
 </p-card>

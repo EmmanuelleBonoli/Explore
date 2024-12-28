@@ -19,6 +19,10 @@ import {
   ActivitiesScrollerComponent
 } from "../../components/activities/activities-scroller/activities-scroller.component";
 import {MenuComponent} from "../../components/activities/menu/menu.component";
+import {SelectButton} from "primeng/selectbutton";
+import {FormsModule} from "@angular/forms";
+import {MapComponent} from "../../components/shared/map/map.component";
+import {ActivitiesSearch, defaultFilters} from "../../models/activities/activities-search.types";
 
 @Component({
   selector: 'app-display-activities-page',
@@ -37,7 +41,10 @@ import {MenuComponent} from "../../components/activities/menu/menu.component";
     ScrollerModule,
     ActivitiesCarouselComponent,
     ActivitiesScrollerComponent,
-    MenuComponent
+    MenuComponent,
+    SelectButton,
+    FormsModule,
+    MapComponent
   ],
   templateUrl: './display-activities-page.component.html',
   styleUrl: './display-activities-page.component.scss',
@@ -47,6 +54,17 @@ export class DisplayActivitiesPageComponent implements OnInit {
 
   activities: Activity[] = [];
   isVisibleSearchInputs: boolean = false;
+
+  choiceDisplayActivities: string = 'list';
+  displayActivitiesOptions: any[] = [
+    {icon: 'pi pi-list', option: 'list'},
+    {icon: 'pi pi-map', option: 'map'},
+  ];
+
+  searchUser: ActivitiesSearch = {
+    localisation: '',
+    types: defaultFilters
+  };
 
   ngOnInit(): void {
     // todo: à remplacer par : this.activitiesFacadeService.getAllActivitiesCategories({location: '', types: defaultFilters});

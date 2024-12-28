@@ -22,3 +22,10 @@ export function checkFormValidity(controls: InputValueControls[]): boolean {
   return controls.every(control => control.isValid);
 }
 
+export function convertMinutesInHours(duration: number): string {
+  const hours = Math.floor(duration / 60);
+  const remainingMinutes = duration % 60;
+
+  return remainingMinutes === 0 ? `${hours}h` : `${hours}h${remainingMinutes}`;
+}
+

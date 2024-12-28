@@ -8,6 +8,8 @@ import {Skeleton} from "primeng/skeleton";
 import {ButtonModule} from 'primeng/button';
 import {NgStyle} from "@angular/common";
 import {Router} from "@angular/router";
+import {ActivityCardComponent} from "../activity-card/activity-card.component";
+import {ActivitiesLevelsComponent} from "../activities-levels/activities-levels.component";
 
 @Component({
   selector: 'app-activities-scroller',
@@ -17,7 +19,9 @@ import {Router} from "@angular/router";
     IconActivityComponent,
     Skeleton,
     ButtonModule,
-    NgStyle
+    NgStyle,
+    ActivityCardComponent,
+    ActivitiesLevelsComponent
   ],
   templateUrl: './activities-scroller.component.html',
   styleUrl: './activities-scroller.component.scss'
@@ -42,7 +46,7 @@ export class ActivitiesScrollerComponent {
   seeDetails(activityId: string): void {
     this.router.navigate([`activity/${activityId}`]);
   }
-  
+
   resetScroll() {
     this.sc.scrollToIndex(0, 'smooth');
   }

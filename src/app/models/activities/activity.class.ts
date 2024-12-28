@@ -5,6 +5,12 @@ export class Activity {
   type: string[] = [];
   picture = '';
   publication = new Date();
+  rating: number = 0;
+  duration: number = 0;
+  difficulty: string = '';
+  creatorName: string = '';
+  creatorAvatar: string = '';
+
 
   constructor(
     id: string,
@@ -12,7 +18,11 @@ export class Activity {
     description: string,
     type: string[],
     picture: string,
-    publication: Date
+    publication: Date,
+    duration: number,
+    difficulty: string,
+    creatorName: string,
+    creatorAvatar: string
   ) {
     this.id = id;
     this.name = name;
@@ -20,5 +30,9 @@ export class Activity {
     this.type = type;
     this.picture = picture;
     this.publication = publication;
+    this.duration = duration;
+    this.difficulty = difficulty;
+    this.creatorName = creatorName;
+    this.creatorAvatar = creatorAvatar;
   }
 }

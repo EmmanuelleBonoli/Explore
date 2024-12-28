@@ -1,0 +1,15 @@
+<div class="flex justify-content-around align-items-center gap-3">
+  <div class="flex align-items-center gap-1">
+    <i class="pi pi-star text-primary" style="font-size: 1.5rem"></i>
+    <p-badge [ngStyle]="{ 'background-color': '#14b8a6', 'color': 'white' }" [value]="rating"></p-badge>
+  </div>
+  <div class="flex align-items-center gap-1">
+    <i class="pi pi-gauge text-primary" style="font-size: 1.5rem"></i>
+    <p-badge [ngStyle]="{ 'background-color': '#14b8a6', 'color': 'white' }" [value]="difficulty"></p-badge>
+  </div>
+  <div class="flex align-items-center gap-1">
+    <i class="pi pi-clock text-primary" style="font-size: 1.5rem"></i>
+    <p-badge [ngStyle]="{ 'background-color': '#14b8a6', 'color': 'white' }"
+             [value]="convertMinutesInHours(duration)"></p-badge>
+  </div>
+</div>

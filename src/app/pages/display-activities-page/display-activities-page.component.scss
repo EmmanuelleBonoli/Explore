@@ -1,6 +1,5 @@
 .display-activities {
   position: relative;
-  margin-top: 15%;
 
   h3 {
     padding-left: 5%;
@@ -13,12 +12,6 @@
   left: 5px;
   top: 5px;
   z-index: 5;
-}
-
-.filter-icon {
-  position: absolute;
-  top: -60px;
-  right: 30px;
 }
 
 :host ::ng-deep {
