@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {NgStyle, NgClass} from '@angular/common';
 import {ActivitiesFacadeService} from "../../../services/activities/activities-facade.service";
 import {AllActivitiesTypes, IconActivity} from "../../../models/activities/all-activities.types";
@@ -19,12 +19,9 @@ import {FormsModule} from '@angular/forms';
 export class GlobalFiltersComponent {
 
   activitiesFacadeService: ActivitiesFacadeService = inject(ActivitiesFacadeService);
+  @Input() searchUser!: ActivitiesSearch;
 
   itemsFilters: IconActivity[] = AllActivitiesTypes;
-  searchUser: ActivitiesSearch = {
-    localisation: '',
-    types: defaultFilters
-  };
 
   private debounceTimer?: ReturnType<typeof setTimeout>;
 

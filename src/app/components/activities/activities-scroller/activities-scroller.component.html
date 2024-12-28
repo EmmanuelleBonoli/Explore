@@ -11,24 +11,16 @@
     (onLazyLoad)="onLazyLoad($event)"
     [lazy]="true"
     styleClass="border border-surface"
-    [style]="{'width': '100%', height: orientation==='horizontal'?'250px':'600px'}">
-    <ng-template #item let-item>
-      <div class="flex flex-col justify-content-center" (click)="seeDetails(item.id)">
+    [style]="{'width': '100%', height: orientation==='horizontal'?'350px':'550px'}">
+    <ng-template #item let-activity>
+      <div class="flex flex-col justify-content-center" (click)="seeDetails(activity.id)">
         <div class="flex-col relative"
              [ngStyle]="{
-             height: orientation === 'horizontal' ? '220px' : 'auto',
-             width: orientation === 'vertical' ? '100vw' : 'auto',
+             height: orientation === 'horizontal' ? '300px' : 'auto',
+             width: orientation === 'vertical' ? '100vw' : '90vw',
              paddingRight: orientation === 'horizontal' ? '0.8rem' : '0'
         }">
-          <div class="flex top-0 left-0 absolute z-1 p-3">
-            <app-icon-activity [activityTypes]="item.type"></app-icon-activity>
-          </div>
-          <img [src]="item.picture"
-               [style]="{
-               height: orientation==='horizontal'&&'100%',
-               width: orientation==='vertical'&& '100%',
-               objectFit:'contain'}"/>
-          <h3 class="pl-3">{{ item.name }}</h3>
+          <app-activity-card [activity]="activity"></app-activity-card>
         </div>
       </div>
     </ng-template>
@@ -37,19 +29,22 @@
       @if (orientation === 'horizontal') {
         <div class=" flex-col align-items-strech gap-2 p-2" [style]="{height: '100%'}">
           <div class="flex items-center pr-2 gap-3">
-            <p-skeleton width="320px" height="200px"/>
-            <p-skeleton width="320px" height="200px"/>
+            <p-skeleton width="320px" height="250px"/>
+            <p-skeleton width="320px" height="250px"/>
           </div>
-          <div class="flex items-center pl-2 pt-2">
+          <div class="flex flex-column items-center pl-2 pt-2 gap-2">
             <p-skeleton width="200px" height="20px"/>
+            <p-skeleton width="300px" height="20px"/>
           </div>
         </div>
       } @else {
         <div class="flex flex-column align-items-center justify-content-center gap-2">
           <p-skeleton width="100vw" height="200px"/>
           <p-skeleton width="200px" height="20px"/>
+          <p-skeleton width="300px" height="20px"/>
           <p-skeleton width="100vw" height="200px"/>
           <p-skeleton width="200px" height="20px"/>
+          <p-skeleton width="300px" height="20px"/>
         </div>
       }
 

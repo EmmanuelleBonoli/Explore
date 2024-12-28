@@ -7,11 +7,15 @@ import {Activity} from '../../../models/activities/activity.class';
 import {NgStyle} from "@angular/common";
 import {Router} from "@angular/router";
 import {IconActivityComponent} from "../../shared/icon-activity/icon-activity.component";
+import {Badge} from "primeng/badge";
+import {Chip} from "primeng/chip";
+import {convertMinutesInHours} from '../../../services/utils/utils';
+import {ActivitiesLevelsComponent} from "../activities-levels/activities-levels.component";
 
 @Component({
   selector: 'app-activity-card',
   standalone: true,
-  imports: [CardModule, ButtonModule, ImageModule, TagModule, NgStyle, IconActivityComponent],
+  imports: [CardModule, ButtonModule, ImageModule, TagModule, NgStyle, IconActivityComponent, Badge, Chip, ActivitiesLevelsComponent],
   templateUrl: './activity-card.component.html',
   styleUrl: './activity-card.component.scss',
 })
@@ -22,4 +26,6 @@ export class ActivityCardComponent {
   seeDetails(): void {
     this.router.navigate([`activity/${this.activity.id}`]);
   }
+
+  protected readonly convertMinutesInHours = convertMinutesInHours;
 }

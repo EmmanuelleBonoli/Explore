@@ -28,6 +28,10 @@ export class ActivitiesApiService {
     return this._http.get<Activity[]>(allActivitiesUrl);
   }
 
+  getActivityById(activityId: string): Observable<Activity> {
+    return this._http.get<Activity>(`${API_ENDPOINTS_ACTIVITIES.getOneActivity}/${activityId}`);
+  }
+
   getNextPageActivities(params: ActivitiesParamsNextPage): Observable<Activity[]> {
     return this._http.get<Activity[]>(`${API_ENDPOINTS_ACTIVITIES.getNextPageActivitiesCategories}/page=${params.page}&category=${params.category}&filter=${params.filter}`);
   }

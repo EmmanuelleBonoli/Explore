@@ -17,6 +17,19 @@ export class ActivitiesStoreService {
     return this._activities$.asObservable();
   }
 
+  getActivityById(activityId: string): Activity | null {
+    const activities = this._activities$.getValue();
+    return activities.find(activity => activity.id === activityId) || null;
+  }
+
+  addActivity(activity: Activity): void {
+    const activities = this._activities$.getValue();
+    const existingActivity = activities.find(a => a.id === activity.id);
+    if (!existingActivity) {
+      this._activities$.next([...activities, activity]);
+    }
+  }
+
   getNextPageActivities(activities: Activity[]): void {
     this._activities$.next([...this._activities$.value, ...activities]);
   }

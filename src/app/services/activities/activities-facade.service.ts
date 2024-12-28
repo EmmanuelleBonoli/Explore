@@ -2,7 +2,7 @@ import {Injectable, inject} from '@angular/core';
 import {ActivitiesApiService} from "./activities-api.service";
 import {ActivitiesStoreService} from "./activities-store.service";
 import {Activity} from "../../models/activities/activity.class";
-import {Observable, tap, switchMap} from 'rxjs';
+import {Observable, tap, switchMap, of} from 'rxjs';
 import {ActivitiesSearch} from "../../models/activities/activities-search.types";
 
 @Injectable({
@@ -24,6 +24,20 @@ export class ActivitiesFacadeService {
     this.activitiesApiService.getNextPageActivities(paramsNextPage).pipe(
       tap((activities: Activity[]): void => this.activitiesStoreServices.getNextPageActivities(activities)),
     ).subscribe()
+  }
+
+  getActivityById(activityId: string): Observable<Activity> {
+    const activityFromStore = this.activitiesStoreServices.getActivityById(activityId);
+
+    if (activityFromStore) {
+      return of(activityFromStore);
+    } else {
+      return this.activitiesApiService.getActivityById(activityId).pipe(
+        tap((activity: Activity): void => {
+          this.activitiesStoreServices.addActivity(activity);
+        })
+      );
+    }
   }
 
   createActivity(activity: Activity): void {

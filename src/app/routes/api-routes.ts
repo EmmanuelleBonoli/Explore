@@ -17,6 +17,7 @@ export const API_ENDPOINTS_EMAIL = {
 }
 
 export const API_ENDPOINTS_ACTIVITIES = {
+  getOneActivity: buildUrl('api/activities/activity'),
   getAllActivitiesCategories: buildUrl('api/activities/categories'),
   getNextPageActivitiesCategories: buildUrl('api/activities/categories/next'),
   createActivity: buildUrl('api/activities/create'),
